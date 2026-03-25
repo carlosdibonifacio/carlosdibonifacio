@@ -1,0 +1,1789 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+%\usepackage{enumitem}
+\usepackage{enumerate}
+\usepackage{appendix}
+\usepackage{geometry}
+\geometry{hmargin=3cm,vmargin=2.5cm}
+\usepackage{eurosym}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[textsize=tiny]{todonotes}
+
+\usepackage{rotating}
+\usepackage[round]{natbib}
+\usepackage{empheq}
+\usepackage{subcaption}
+\usepackage{booktabs}
+
+
+
+%\usepackage{mathtools}
+%\mathtoolsset{showonlyrefs} 
+%\graphicspath{{./figs/}}
+
+%\setcounter{tocdepth}{2}
+%\let\oldtocsection=\tocsection
+%\let\oldtocsubsection=\tocsubsection
+%\let\oldtocsubsubsection=\tocsubsubsection
+%\renewcommand{\tocsection}[2]{\hspace{0em}\oldtocsection{#1}{#2}}
+%\renewcommand{\tocsubsection}[2]{\hspace{1em}\oldtocsubsection{#1}{#2}}
+%\renewcommand{\tocsubsubsection}[2]{\hspace{2em}\oldtocsubsubsection{#1}{#2}}
+
+\def\1{{\bf 1}}
+
+ 
+%
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathbb{V}{\rm ar}}
+
+\newcommand{\dd}{\mathrm{d}}
+
+\def \V{\mathbb{V}}
+\def \Lc{\mathcal{L}}
+ 
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{plain}
+\newtheorem{example}[theorem]{Example}
+\numberwithin{equation}{section}
+
+%
+% Rene's shortcuts
+%
+
+\newcommand{\myblue}[1]{\textcolor{blue}{#1}}
+\newcommand{\myred}[1]{\textcolor{red}{#1}}
+
+\newcommand{\hs}{\vspace{3mm}}
+\graphicspath{{./figs/}}
+
+\newcommand{\eps}{\epsilon}
+
+\newcommand{\lf}{\lambda_{\rm f}}
+\newcommand{\li}{\lambda_{\rm i}}
+
+
+%
+% end Rene's shortcuts
+%
+
+\graphicspath{{figures_pdf/}}
+
+\begin{document}
+
+\title{Incentives for decarbonation}
+\author{René Aïd\thanks{Université Paris Dauphine -- PSL Research University}}
+\maketitle
+
+\tableofcontents
+
+\section{Decarbonation in finite time horizon}\label{sec:finite}
+
+A \emph{Principal} (the regulator or social planner) delegates abatement to a representative \emph{Agent}
+(a regulated firm) through a terminal contract (or transfer) $\xi$, which is $\mathcal{F}_T$--measurable.
+The Agent controls the emissions dynamics through an unobservable effort process $u=(u_t)_{t\in[0,T]}$.
+
+The controlled emissions rate follows
+\[
+dX_t = u_t\,dt + \sigma\,dW_t,
+\qquad X_0=x_0,
+\]
+and exerting effort entails the instantaneous cost
+\[
+c(u)=\frac12\,\frac{u^2}{\gamma}.
+\]
+Preferences are represented by utilities $U_P$ and $U_A$ (typically CARA in applications).
+
+\paragraph{Agent's problem.}
+Given a contract $\xi$, the Agent chooses effort to maximize expected utility net of abatement costs:
+\[
+V^A(\xi)
+:=
+\sup_{u}\;
+\E\Big[
+U_A\Big(
+\xi-\int_0^T c(u_t)\,dt
+\Big)
+\Big].
+\]
+
+\paragraph{Principal's problem.}
+The Principal chooses $\xi$ to maximize her expected utility over terminal welfare net of the transfer,
+taking into account (i) the Agent's optimal response and (ii) the Agent's participation constraint:
+\[
+\sup_{\xi}\;
+\E\Big[
+U_P\Big(
+-\xi-\frac12\lambda X_T^2
+\Big)
+\Big]
+\quad\text{subject to}\quad
+V^A(\xi)\ge R_0,
+\qquad
+u\in\arg\max_{\tilde u}\E\Big[
+U_A\Big(
+\xi-\int_0^T c(\tilde u_t)\,dt
+\Big)
+\Big].
+\]
+Equivalently, the incentive compatibility constraint can be written as $u\in\mathcal{U}^\star(\xi)$ where
+$\mathcal{U}^\star(\xi)$ denotes the set of Agent-optimal efforts under contract $\xi$.
+
+\hs
+
+We keep the same output dynamics observed by the Principal,
+\[
+dX_t = u_t\,dt + \sigma\,dW_t,\qquad X_0=x_0,
+\qquad
+c(u)=\frac12\frac{u^2}{\gamma},
+\]
+and assume the Agent has exponential utility $U_A(z)=-e^{-\eta_A z}$.
+We restrict attention to contracts $\xi$ that are $\mathcal F_T^X$--measurable, where
+$\mathcal F_t^X:=\sigma(X_s,\;0\le s\le t)$.
+
+\hs
+
+Assume $U_A(x)=-e^{-\eta_a x}$, $dX_t=u_tdt+\sigma dW_t$, and let
+\[
+H(z):=\sup_{u\in\mathbb R}\{zu-c(u)\}.
+\]
+Consider any contract of the form
+\[
+Y_T
+=
+Y_0+\int_0^T Z_t\,dX_t +\int_0^T \frac12\,\eta_a\sigma^2 Z_t^2\,dt -\int_0^T H(Z_t)\,dt,
+\]
+with $(Z_t)$ predictable and square-integrable. For any admissible effort $u$, define
+\[
+\Delta_t:=Z_tu_t-c(u_t)-H(Z_t)\le 0.
+\]
+Then
+\[
+Y_T-\int_0^T c(u_t)\,dt
+=
+Y_0+\int_0^T \Delta_t\,dt+\int_0^T Z_t\sigma\,dW_t+\int_0^T \frac12\,\eta_a\sigma^2 Z_t^2\,dt,
+\]
+hence
+\[
+U_A\Big(Y_T-\int_0^T c(u_t)\,dt\Big)
+=
+U_A(Y_0)\,
+\exp\Big(-\eta_a\int_0^T \Delta_t\,dt\Big)\,
+\exp\Big(-\eta_a\int_0^T Z_t\sigma\,dW_t-\frac12\eta_a^2\int_0^T \sigma^2 Z_t^2\,dt\Big).
+\]
+The last factor is a stochastic exponential and has expectation $1$ (Novikov's condition is ensured by
+square-integrability of $Z$), while the first factor is $\ge 1$ since $\Delta_t\le 0$. Therefore,
+\[
+\E\Big[U_A\Big(Y_T-\int_0^T c(u_t)\,dt\Big)\Big]\le U_A(Y_0).
+\]
+Moreover, equality holds when $\Delta_t=0$ a.s., i.e.\ when $u_t\in\arg\max_{u}\{Z_tu-c(u)\}$. In particular,
+\[
+V^A(Y_T)=\sup_u\E\Big[U_A\Big(Y_T-\int_0^T c(u_t)\,dt\Big)\Big]=U_A(Y_0).
+\]
+
+\hs
+
+Since the participation constraint reads $U_A(Y_0)\ge R_0$, it typically binds and it holds that
+\[
+Y_0=\bar R_0,
+\qquad
+\bar R_0:=-\frac{1}{\eta_a}\log(-R_0),
+\]
+and the Principal's choice reduces to the incentive process $Z$. Hence the controlled $(X,Y)$ dynamics are
+\[
+\begin{cases}
+dX_t=\gamma Z_t\,dt+\sigma\,dW_t,\\[4pt]
+dY_t=Z_t\,dX_t+\frac12(\eta_a\sigma^2-\gamma)Z_t^2\,dt,
+\end{cases}
+\qquad (X_t,Y_t)=(x,y)\ \text{at time }t.
+\]
+Substituting $dX_t$ into the $Y$ dynamics yields the equivalent drift--diffusion form
+\[
+dY_t=\frac12(\gamma+\eta_a\sigma^2)Z_t^2\,dt+\sigma Z_t\,dW_t.
+\]
+
+The Principal's value function is
+\[
+V(t,x,y)
+:=
+\sup_{Z}\;
+\E_{t,x,y}\Big[
+U_P\Big(-Y_T-\frac{\lambda}{2}X_T^2\Big)
+\Big],
+\qquad
+V(T,x,y)=U_P\Big(-y-\frac{\lambda}{2}x^2\Big).
+\]
+
+Therefore, the dynamic programming principle yields the HJB PDE for $V$:
+\[
+\partial_t V(t,x,y)
++
+\sup_{z\in\mathbb R}
+\Big\{
+\mathcal L^{z}V(t,x,y)
+\Big\}
+=0,
+\qquad
+V(T,x,y)=U_P\Big(-y-\frac{\lambda}{2}x^2\Big),
+\]
+i.e.
+\begin{align*}
+&\partial_t V
++
+\sup_{z\in\mathbb R}
+\left\{
+\gamma z\,\partial_x V
++\frac12(\gamma+\eta_a\sigma^2)z^2\,\partial_y V
++\frac{\sigma^2}{2}\Big(
+\partial_{xx}V+2z\,\partial_{xy}V+z^2\,\partial_{yy}V
+\Big)
+\right\}
+=0,
+\\
+&V(T,x,y)=U_P\Big(-y-\frac{\lambda}{2}x^2\Big).
+\end{align*}
+
+\hs
+Assume $U_P(x)=-e^{-\eta_p x}$ and define the Principal's certainty-equivalent \emph{cost} $v(t,x)$ by
+\[
+V(t,x,y)=U_P\big(-v(t,x)-y\big)=-\exp\big(\eta_p\,(v(t,x)+y)\big).
+\]
+Then the terminal condition $V(T,x,y)=U_P\Big(-y-\frac{\lambda}{2}x^2\Big)$ is equivalent to
+\[
+v(T,x)=\frac{\lambda}{2}x^2.
+\]
+
+Using $V(t,x,y)=-e^{\eta_p(v+y)}$, we have
+\[
+V_t=\eta_p V\,v_t,\qquad
+V_x=\eta_p V\,v_x,\qquad
+V_y=\eta_p V,
+\]
+\[
+V_{xx}=\eta_p V\,v_{xx}+\eta_p^2 V\,v_x^2,\qquad
+V_{xy}=\eta_p^2 V\,v_x,\qquad
+V_{yy}=\eta_p^2 V.
+\]
+Substituting into the HJB for $V$ and using that $V<0$ turns the supremum over $Z$ into an infimum
+for the certainty equivalent. One obtains the one-dimensional PDE
+\[
+v_t(t,x)+\inf_{z}\Big\{
+\gamma z\,v_x(t,x)
++\frac12\big(\gamma+\eta_a\sigma^2\big)z^2
++\frac{\sigma^2}{2}\Big(v_{xx}(t,x)+\eta_p\big(v_x(t,x)+z\big)^2\Big)
+\Big\}=0,
+\qquad
+v(T,x)=\frac{\lambda}{2}x^2.
+\]
+
+Expanding the square, the minimization in $Z$ is quadratic:
+\[
+\inf_{z}\big\{
+\frac12\big(\gamma+(\eta_a+\eta_p)\sigma^2\big)z^2
++\big(\gamma+\eta_p\sigma^2\big)v_x(t,x)\,z
+\big\},
+\]
+ Hence the minimizer is
+\[
+z^\star(t,x)
+=
+-\frac{\gamma+\eta_p\sigma^2}{\gamma+(\eta_a+\eta_p)\sigma^2}\,v_x(t,x),
+\qquad
+u_t^\star=\gamma z_t^\star,
+\]
+and the reduced PDE can be written explicitly as
+\[
+v_t+\frac{\sigma^2}{2}v_{xx}
+-\frac12\Big(\frac{(\gamma+\eta_p\sigma^2)^2}{\gamma+(\eta_a+\eta_p)\sigma^2 } -  \eta_p\sigma^2 \Big)  
+\,v_x^2
+=0,
+\qquad
+v(T,x)=\frac{\lambda}{2}x^2.
+\]
+
+\begin{remark}[Effective control parameter and limiting cases]
+The reduced certainty-equivalent PDE for the Principal can be written as
+\[
+v_t+\frac{\sigma^2}{2}v_{xx}-\frac12\,\gamma_{\rm eff}\,v_x^2=0,
+\qquad
+v(T,x)=\frac{\lambda}{2}x^2,
+\]
+with the \emph{effective} parameter
+\[
+\gamma_{\rm eff}
+=
+\frac{(\gamma+\eta_p\sigma^2)^2}{\gamma+(\eta_a+\eta_p)\sigma^2}-\eta_p\sigma^2
+=
+\frac{\gamma(\gamma+\eta_p\sigma^2)-\eta_a\eta_p\sigma^4}{\gamma+(\eta_a+\eta_p)\sigma^2}.
+\]
+Hence the contract-theoretic problem has exactly the same analytical form as the benchmark model, up to the
+replacement $\gamma\mapsto \gamma_{\rm eff}$.
+
+In particular, if the Agent is risk-neutral ($\eta_a=0$), then $\gamma_{\rm eff}=\gamma$ and the Principal's
+problem coincides with the benchmark. By contrast, for $\eta_a>0$, risk compensation and informational frictions
+reduce the effective coefficient $\gamma_{\rm eff}$. The well-posed regime corresponds to $\gamma_{\rm eff}>0$;
+if $\gamma_{\rm eff}\le 0$, the nonlinear term changes sign and one enters a ``blow-up'' regime in which the
+certainty-equivalent cost is no longer finite (analogous to the risk-sensitive planner discussed earlier).
+\end{remark}
+
+
+\section{Incentive provision in infinite horizon}
+
+\subsection{The general case}\label{ssec:general-infinite}
+
+We consider a situation where there is no pre-definite termination $T$ of the contract. Instead, we consider a situation where the Principal decides when to end the contract. Since our concern is to model regulation situations, we do not consider cases where the Agent holds also the right to exit the contract. We assume a single state variable $X$ with dynamics
+\begin{align*}
+\dd X_t = a_t \dd t + \sigma \dd W_t, \quad X_0 = x,
+\end{align*}
+where $a_t$ is the effort of the Agent. 
+
+\paragraph{Agent's problem.} The Agent problem is now
+\begin{align}\label{eq:A}
+V^{\rm A}(\tau,\pi,\xi) := \sup_{a} \E\Big[ \int_0^\tau r e^{- r t}\big\{ f(a_t,X_t) + \pi_t \big\} \dd t + e^{-r \tau} \xi \Big],
+\end{align}
+where $\tau$ is a stopping-time terminating the contract, $\pi$ is a payment (positive or negative) process and $\xi$ is a terminal payment (positive or negative) which is $\mathcal F_{\tau}$ adapted. The triplet $C := (\tau,\pi,\xi)$ is choosen by the Principal.
+
+\paragraph{Principal's problem.} The Principal problem is now
+\begin{align}\label{eq:P}
+V^{\rm P} & := \sup_{C} \E\Big[ \int_0^\tau \rho e^{- \rho t}\big\{ g(X_t) - \pi_t \big\} \dd t - e^{-\rho \tau} \xi \Big], \quad
+\text{s. t.}  \quad V^{\rm A}(C) \geq R_0,
+\end{align}
+where $R_0$ is the reservation utility of the Agent.
+
+We can make some remarks on this problem. \begin{enumerate}[\upshape (i)]
+
+\item First, instead of having only $\pi$ is the running profit of the Agent, we can introduce a utility of the salary $u(\pi)$. Same apply for the terminal payment $\xi$ which can be replaced by a utility $u(\xi)$. We leave this aside for the moment. Second, because of discounting, providing a lump-sum payment $\xi$ at time $\tau$ or a perpetuity starting at time $\tau$ is the same. This remark builds on the relation
+\begin{align*}
+e^{-r \tau} \xi = \int_\tau^{+\infty} r e^{-r t} \xi \dd t.
+\end{align*} 
+This remark also explains the presence of the discount rate $r$ and $\rho$ in the running profits of the Agent and the Principal. They can be removed as they do not change the optimal solution. 
+
+\item Nevertheless, it should be noted that putting this discount rate in front of the running cost and payment changes their dimensions. If the salary $\pi$ is assumed to be in \euro/year, then $r \pi_t dt$ is still in \euro/year, which makes not much of a sense from an optimisation point of view. Thus, $r \pi$ should be in \euro/year, which implies that $\pi$ should be a payment in \euro. We will come back later to this remark.
+
+\end{enumerate}
+
+\hs
+
+Now, we turn to the representation of the terminal payment $\xi$. We consider terminal payment of the form $\xi = Y_\tau^{Y_0,Z}$ with
+\begin{align}
+\dd Y_t^{Y_0,Z} =  Z_t \dd X_t - H(Z_t,X_t) \dd t + r Y_t \dd t, \quad H(z,x) := \sup_{a} \big\{ z a + r f(a,x) \big\} + r \pi,
+\end{align} 
+where $Z$ is an $\mathcal F_{X}$ adapted process. Furthermore, we denote by $\hat{a}(z,x)$ the assume unique maximiser of the Hamiltonian $H$ of the Agent.
+
+Now, we check that for all stopping times $\tau$ and payment process $\pi$, it holds that  
+\begin{align}
+V^{\rm A}(\tau,\pi,Y_\tau^{Y_0,Z}) = Y_0.
+\end{align}
+
+Indeed, we have
+\begin{align*}
+\E^{a}\big[ e^{-r \tau} Y_\tau\big] = Y_0 + \E^{a}\Big[ \int_0^\tau e^{-r t} \big\{-r Y_t + Z_t a_t - H(Z_t,X_t) + r Y_t \big\} \dd t\Big]
+\end{align*}
+Besides, it holds that for all $\omega$, 
+\begin{align*}
+\underbrace{Z_t a_t + r f(a_t,X_t) + r \pi_t - H(Z_t,X_t)}_{\leq 0} - r f(a_t,X_t) - r \pi_t \leq  - r f(a_t,X_t) - r \pi_t
+\end{align*}
+Hence
+\begin{align*}
+\E^{a}\Big[ \int_0^\tau e^{-r t} \big\{ r f( a_t,X_t) + r \pi_t \big\} \dd t + e^{-r \tau} Y_\tau\Big] \leq  Y_0.
+\end{align*}
+Hence, by taking the supremum, we have $V^{\rm A}(\tau,\pi,Y_\tau^{Y_0,Z}) \leq Y_0$. Equality is obtained when the Agent applies the optimal response $\hat{a}(Z_t,X_t)$.
+
+\hs
+This representation of terminal payment is without loss of optimality as any $\mathcal F_\tau$ mesurable random variable can be represented by a process of the form $Y$. Hence, the Principal can satisfy easily the participation constraint by taking here $Y_0 = R_0$.
+
+\hs
+
+The problem of the Principal can now be restated as
+\begin{align}\label{eq:P}
+V(x,y) & := \sup_{\tau,\pi,Z} \E\Big[ \int_0^\tau \rho e^{- \rho t}\big\{ g(X_t) - \pi_t \big\} \dd t - e^{-\rho \tau} Y_\tau^{y,Z} \Big], \\
+\dd X_t & = \hat{a}(Z_t,X_t) \dd t + \sigma \dd W_t, \quad X_0 = x,\\
+\dd Y_t & = \big[r Y_t - r f(\hat{a}(Z_t,X_t)) - r \pi_t \big] \dd t + \sigma Z_t \dd W_t, \quad Y_0 = y.
+\end{align}
+
+Define 
+\begin{align*}
+\Lc^{z,\pi} v := \hat{a}(z,x) v_x + (ry - r f(\hat{a}(z,x),x) - r \pi) v_y + \frac12 \sigma^2 v_{xx} + \frac12 \sigma^2 z^2 v_{yy} + \sigma^2 z v_{xy}.
+\end{align*}
+
+The value function $V$ of the Principal's problem satisfies the variational inequality given by
+\begin{align}\label{eq:P-VI}
+\min\big\{ V + y \, ; \, \rho V - \sup_{z,\pi} \Lc^{z,\pi}V \big\} = 0.
+\end{align}
+
+
+\noindent{\bf Remarks}
+\begin{enumerate}[\upshape (i)]
+
+\item The equation~\eqref{eq:P-VI} is in general dependent of both $x$ and $y$ which makes it highly difficult to solve. From a modeling perspective, our concern is to find alternatives or cases where it is possible to reduce this latter to a more tractable equation, even from a numerical point of view. 
+
+\end{enumerate}
+
+\subsection{Application of the general case to a decarbonation model} \label{ssec:incentives}
+
+In this section, we apply quite directly the incentive mechanism designed in Section~\ref{ssec:general-infinite} to show that we get a difficult PDE for the Principal. We make  the slight difference that in our case we get rid of the choice of the stopping-time to cease the incentives. Indeed, we consider as the state process the emission rate
+$X=(X_t)_{t\ge 0}$ starting from $X_0=x>0$ and follows the controlled dynamics through an incentive process $Z=(Z_t)_{t\ge 0}$:
+\begin{equation}
+\label{eq:X-dyn}
+dX_t \;=\; \gamma Z_t\,dt \;+\; \sigma \,dW_t,
+\qquad \gamma, \sigma>0.
+\end{equation}
+
+The stopping time is \emph{exogenous} and defined as the first time $X$ hits the boundary:
+\begin{align} \label{eq:tau}
+\tau :=  \inf\{t\ge 0:\; X_t \le 0\}.
+\end{align}
+
+The contract $Y=(Y_t)_{t\ge 0}$  dynamics is given by 
+\begin{align}\label{eq:Y-dyn}
+dY_t \;=\; \Big(rY_t + \frac{1}{2} \gamma  Z_t^2\Big)\,dt \;+\; \sigma Z_t\,dW_t,
+\qquad r>0.
+\end{align}
+
+This contract comes the problem of the Agent given by
+\begin{align}
+V^{\rm A} :=
+\sup_{u}\;
+\mathbb{E}_{x,y}\Big[
+\int_0^\tau  e^{-r t} \Big\{ - \frac12 \frac{u _t^2}{\gamma}\Big\} \dd t + e^{-r \tau}Y_\tau
+\Big],
+\end{align}
+inducing the Agent's Hamiltonian given by $H(z) := \sup_{u} \big\{ z u - \frac12 u^2/\gamma\} = \frac12 \gamma z^2$ and inducing best-response $\hat u(z) := \gamma z$.
+
+\hs
+
+The Principal minimizes a discounted objective up to the exogenous stopping time $\tau$:
+\begin{align}\label{eq:V-def}
+V(x,y)
+\;:=\;
+\inf_{Z}\;
+\mathbb{E}_{x,y}\Big[
+\int_0^\tau  e^{-\rho t}\,\frac{\lambda}{2}X_t^2\,dt
+\;+\;
+e^{-\rho \tau}Y_\tau
+\Big],
+\qquad \lambda>0,
+\end{align}
+where $\rho>0$ is the Principal's discount rate.
+
+\hs
+
+The generator  of the Principal's control problem  is
+\begin{align}\label{eq:generator}
+\mathcal{L}^{Z}\varphi = \gamma Z\,\varphi_x +
+\Big(ry+\tfrac{1}{2} \gamma  Z^2\Big)\varphi_y +
+\frac{1}{2}\sigma^2 \Big(\varphi_{xx} + 2 Z \varphi_{xy}+Z^2\varphi_{yy}\Big).
+\end{align}
+
+The (formal) HJB on the domain $\{x>0\}$ is
+\begin{align} \label{eq:HJB-2D}
+\rho V(x,y) = \inf_{z} \Big\{ \frac12 \lambda  x^2 + \mathcal{L}^{z}V(x,y) \Big\},
+\qquad x>0,
+\end{align}
+with the Dirichlet boundary condition induced by the terminal term $Y_\tau$:
+\begin{align} \label{eq:deleg-bc}
+V(0,y)=y.
+\end{align}
+
+\hs
+
+ 
+Writing \eqref{eq:HJB-2D} in expanded form,
+\begin{align}\label{eq:deleg-HJB-expanded}
+&\rho V  = \frac12  \lambda  x^2 + \inf_{z}\Big\{
+ \gamma z\,V_x + \Big(ry + \frac12 \gamma z^2\Big)V_y  
++\frac12\sigma^2\Big(V_{xx} + 2 z V_{xy} + z^2 V_{yy}\Big) \Big\}.
+\end{align}
+
+\hs
+
+Collecting the $z$-dependent terms in \eqref{eq:deleg-HJB-expanded} gives
+\begin{align*}
+z\Big(\gamma V_x+\sigma^2V_{xy}\Big)  +  \frac12 z^2\Big(\gamma V_y+\sigma^2V_{yy}\Big).
+\end{align*}
+Assuming the local convexity condition
+\begin{equation}
+\label{eq:deleg-convexity}
+\gamma V_y(x,y)+\sigma^2V_{yy}(x,y)>0,
+\end{equation}
+the unique minimizer is
+\begin{equation}
+\label{eq:deleg-Zstar}
+Z^*(x,y)=
+-\frac{\gamma V_x(x,y)+\sigma^2V_{xy}(x,y)}
+{\gamma V_y(x,y)+\sigma^2V_{yy}(x,y)}.
+\end{equation}
+Substituting \eqref{eq:deleg-Zstar} into \eqref{eq:HJB-2D} yields the reduced (nonlinear) PDE
+\begin{equation}
+\label{eq:deleg-PDE-reduced}
+\rho V
+=
+\frac{\lambda}{2}x^2
++
+r y\,V_y
++
+\frac12\sigma^2 V_{xx}
+-
+\frac12\,
+\frac{\big(\gamma V_x+\sigma^2V_{xy}\big)^2}
+{\gamma V_y+\sigma^2V_{yy}},
+\qquad x>0,
+\end{equation}
+with boundary condition \eqref{eq:deleg-bc}.
+
+\paragraph{Remark: failure of the affine reduction when $\rho\neq r$}
+A natural attempt is an affine ansatz in the contract state,
+\begin{equation}
+V(x,y)=a(x)\,y+b(x).
+\end{equation}
+However, after pointwise minimization in $z$, the nonlinearity in \eqref{eq:deleg-PDE-reduced}
+generically produces quadratic terms in $y$ unless $a'(x)=0$ (hence $a$ is constant).
+Imposing the boundary condition $V(0,y)=y$ forces $a\equiv 1$, but then the coefficient of $y$
+in \eqref{eq:deleg-HJB-expanded} requires $\rho=r$. Consequently, for $\rho\neq r$ the value
+function cannot be affine in $y$ and one must work with the full two-dimensional PDE
+\eqref{eq:deleg-PDE-reduced}--\eqref{eq:deleg-bc} (or apply a different change of variables).
+
+
+\hs
+
+
+Assume $\rho = r$. Consider an affine ansatz in the contract state,
+\begin{align}\label{eq:ansatz}
+V(x,y)=y+b(x),
+\qquad b(0)=0,
+\end{align}
+is consistent with \eqref{eq:HJB-2D}--\eqref{eq:deleg-bc} and reduces the problem to a single ODE in $x$.
+
+Indeed, plugging \eqref{eq:ansatz} into \eqref{eq:HJB-2D} yields
+\begin{align}\label{eq:reduced-HJB}
+r\,b(x) = \inf_{z} \Big\{  \frac12  \lambda  x^2 + \gamma z\,b'(x) + \frac{1}{2} \gamma  z^2 + \frac{1}{2}\sigma^2 b''(x) \Big\},
+\qquad x>0.
+\end{align}
+The minimizer is explicit:
+\begin{align} \label{eq:Z-star}
+z^*(x)  =  -r\,b'(x),
+\end{align}
+and substituting back gives the reduced nonlinear ODE
+\begin{align}\label{eq:ODE-b-general}
+\frac{1}{2}\sigma^2\,b''(x)  -  \frac{\gamma}{2}\big(b'(x)\big)^2 + \frac{\lambda}{2}x^2 -  r b(x) = 0,
+\quad x>0,
+\quad b(0)=0.
+\end{align}
+
+This reduced ODE \eqref{eq:ODE-b-general} has the same structural form as the
+standard infinite-horizon HJB for a geometric diffusion with quadratic running cost and quadratic control cost of the social planner problem described in Section~\ref{app:social-benchmark}. As such, there is no difference in that case with the central planner problem.
+
+
+\subsection{An alternative design}\label{ssec:alternative}
+
+
+Recall the Agent's problem can be given by
+\begin{align*}
+V^A(\tau, \tilde \pi, \tilde \xi) := \sup_{a} J(a), \quad J(a) := \E\Big[\int_0^\tau e^{-r t} \big\{f(a_t,X_t)  + \tilde \pi_t\big\} \dd t + e^{-r \tau} \tilde \xi\Big],
+\end{align*}
+where we  removed the presence of the discount rate $r$ in the running cost and profits. As pointed out in the Remark~(ii) of Section~\ref{ssec:general-infinite}, the payment $\tilde \pi_t$ is here in \euro/year whereas the terminal payment $\tilde \xi$ is lump-sum in \euro.  Denote 
+\begin{align*}
+P^r_\tau := \int_0^\tau e^{- r t} \tilde\pi_t \dd t + e^{-r \tau} \tilde\xi,
+\end{align*}
+the total payment received by the Agent. By integration by parts, it holds that
+\begin{align*}
+P^r_\tau :=  \pi_0 + \int_0^\tau e^{- r t} \dd \pi_t  + e^{-r \tau} (\tilde\xi - \pi_\tau), \quad \pi_t := \frac1r \tilde\pi_t,
+\end{align*}
+where $\pi_t$ is now expressed in \euro. Thus by taking $\tilde \xi = \pi_\tau$, the problem of the Agent can be formulated as
+\begin{align*}
+V^A(\tau, \pi) := \sup_{a} J(a), \quad J(a) := \E\Big[ \pi_0 + \int_0^\tau e^{-r t} \big\{f(a_t,X_t) \dd t + \dd\pi_t\big\}\Big],
+\end{align*}
+
+Taking as a dynamics for $\pi$ as
+\begin{align}\label{eq:pi-ra}
+d\pi_t =   Z_t \dd X_t - H(Z_t,X_t) \dd t, \quad H(z,x) := \sup_{a} \big\{ z a + f(a,x)\big\}, \quad \pi_0 \quad \text{given},
+\end{align}
+ensures that $V^A(\tau, \pi) =  \pi_0.$  Moreover, in the case where the Agent would be risk-averse with CARA exponential utility $U_A$ with parameter $\eta_a$, taking as a payment process
+\begin{align}
+d\pi_t =   Z_t \dd X_t - H(Z_t,X_t) \dd t + \frac12 \eta_a \sigma^2 e^{- r t} Z_t^2 \dd t,
+\end{align}
+ensures that 
+\begin{align*}
+V^A(\tau, \pi) =  \sup_{a} \E\Big[ U_A\Big(\pi_0 + \int_0^\tau e^{-r t} \big\{f(a_t,X_t) \dd t + \dd\pi_t\big\} \Big)\Big] = U_A(\pi_0).
+\end{align*}
+
+Indeed, in that case, we have
+\begin{align*}
+ J(a) = -U_A(\pi_0)\E\Big[U_A\Big(& \int_0^\tau  e^{-r t} \Big\{ \Big[ f(a_t,X_t) + Z_t a_t - H(Z_t,X_t)   
++  \frac12 \eta_a\sigma^2 e^{-r t} Z_t^2\Big]   \dd t + \sigma e^{-r t} Z_t \dd W_t \Big\} \Big) \Big].
+\end{align*}
+Besides, denote $M_\tau := U_A(L_\tau)$ where
+\begin{align*}
+L_\tau :=  \int_0^\tau  e^{-r t} \Big\{ \Big[ f(a_t,X_t) + Z_t a_t - H(Z_t,X_t)   
++  \frac12 \eta_a\sigma^2 e^{-r t} Z_t^2\Big]   \dd t + \sigma e^{- r t} Z_t \dd W_t \Big\} \Big).
+\end{align*}
+It holds that
+\begin{align*}
+\dd M_t & = M_t\big[ -\eta_a \dd L_t + \frac12 \eta_a^2 \sigma^2 e^{-2 r t} Z_t^2 \dd t\big] \\
+& =  \underbrace{-\eta_a   M_t}_{\geq 0} e^{- r t} [ \underbrace{f(a_t,X_t) + Z_t a_t - H(Z_t,X_t)}_{\leq 0}]  \dd t   -\eta_a  M_t \sigma e^{- r t} Z_t dW_t.
+\end{align*}
+Thus $M_t$ is a supermartingale for all controls $a$ and a martingale for the Agent's optimal response $\hat a$. Hence,
+\begin{align*}
+ J(a) = - U_A(\pi_0) \E[M_\tau] \leq U_A(\pi_0).
+\end{align*}
+
+\hs
+
+Regarding the problem of the Principal, it is initialy given by
+\begin{align}\label{eq:P-init}
+\sup_{\tau,\tilde\pi,\tilde\xi} J^{P}(\tau,\tilde\pi,\tilde\xi), \quad 
+J^{P}(\tau,\tilde\pi,\tilde\xi) := 
+\E\Big[ \int_0^\tau e^{-\rho t} \big\{g(X_t) -\tilde\pi_t\big\} \dd t -  e^{-\rho \tau} \tilde\xi \Big],
+\end{align}
+where the controls are the payment rate $\tilde\pi$ in \euro/year and the lump-sum terminal payment $\tilde\xi$ in \euro. We reformulate it as
+\begin{align}\label{eq:P-alt}
+\sup_{\tau,\pi} J^{P}(\tau,\pi), \quad 
+J^{P}(\tau,\pi) := 
+\E\Big[ \int_0^\tau e^{-\rho t} \big\{g(X_t) \dd t -\dd \pi_t\big\} - \pi_0 \Big],
+\end{align}
+where the control of the Principal is now the instantaneous flow of payment $\dd \pi_t$ expressed in \euro. 
+The problems~\eqref{eq:P-init} and~\eqref{eq:P-alt} are not equivalent. Indeed, the total payment from the perspective of the Principal is
+\begin{align*}
+P^\rho_\tau =  \frac{r}{\rho} \pi_0 + \int_0^\tau \frac{r}{\rho} e^{- \rho t} \dd \pi_t  + e^{-\rho \tau} \Big(1 - \frac{r}{\rho} \Big) \pi_\tau.
+\end{align*}
+When the Principal and the Agent do not share the same discount rate--which is the interesting case--we cannot get rid of the terminal payment $\pi_\tau$, unless we assume that there is no terminal paymen. For this reason, this alternative setting reduces the possibility of the Principal by suppressing the possibility of terminal payment at termination of the incentive mechanism.
+
+\hs
+
+Nevertheless, this restriction in the possibilities of the Principal comes with the benefit of allowing for risk-averse Principal. Using the dynamics of the payment process~\eqref{eq:pi-ra}, the optimisation problem of a risk-averse Principal with CARA exponential utility fonction $U_P$ can be reduced to
+\begin{align}\label{eq:Pbis}
+&V(0,x,\pi_0) := 
+\sup_{Z} \E\Big[U_P\Big(\int_0^\tau  e^{-\rho t} \big\{ \big[g(X_t) \dd t + f(\hat a_t, X_t) - \frac12 \eta_a \sigma^2 e^{- r t} Z_t^2 \big] \dd t - \sigma Z_t \dd W_t \big\} \Big)\Big],  \\
+&\dd X_t  = \hat{a}(Z_t,X_t) \dd t + \sigma \dd W_t, \quad X_0 = x,\\
+&\dd \pi_t  =  \big[ \frac12 \eta_a \sigma^2 e^{- r t} Z_t^2 - f(\hat{a}(Z_t,X_t)) \big] \dd t + \sigma  Z_t \dd W_t.
+\end{align}
+ The participation constraint $V^A(\tau,\pi) \geq U_A(y_0)$  is handled thanks to the constant term $\pi_0$. 
+
+
+\subsection{Application of the alternative setting to the decarbonation model}
+
+Applying these remarks to our decarbonation model, the emission rate process $(X_t)$ evolves, under the Agent's effort $u$, as
+\begin{align}
+dX_t &= u_t\,dt + \sigma\,dW_t,
+\qquad X_0=x>0,
+\qquad \sigma>0.
+\end{align}
+The stopping time is exogenous and given by the first time $X$ hits the (absorbing) boundary $0$:
+\begin{align}
+\tau := \inf\{t\ge 0:\ X_t \le 0\}.
+\end{align}
+
+The Agent has CARA utility $U_A(c) := -\exp(-\eta_a c),$
+$\eta_a>0,$ and discounts at rate $r>0$. We take the instantaneous flow of effort to be
+$f(u,x) := -\frac{1}{2\gamma}u^2.$ Define the Agent Hamiltonian
+$H(z,x) := \sup_{u}\{zu + f(u,x)\}.$ For the quadratic specification above, $H$ is independent of $x$ and given by
+\begin{align}
+H(z) &= \sup_{u\in\mathbb{R}}\Big\{zu - \frac{1}{2\gamma}u^2\Big\}
+      = \frac{1}{2}\gamma z^2,
+&\hat u(z) &= \arg\max_{u}\Big\{zu - \frac{1}{2\gamma}u^2\Big\} = \gamma z.
+\end{align}
+
+Using the formulation of the Agent's problem in terms of payment process $\pi$ we get
+\begin{align*}
+V^A(\pi) := \sup_{a} J(a), \quad J(a) := \E\Big[U_A\Big(\pi_0 +  \int_0^\tau  e^{-r t} (\dd \pi_t - \frac1{2 \gamma} u_t^2 \dd t \Big)\Big],
+\quad U_A(x) = -e^{-\eta_a x}
+\end{align*}
+where
+\begin{align*}
+d\pi_t =   Z_t \dd X_t - H(Z_t) \dd t + \frac12 \eta_a \sigma^2 e^{-r t} Z_t^2 \dd t. 
+\end{align*}
+
+The Principal acting as a de-risking entity of the economy is assumed to be risk-neutral, and to discount at rate $\rho>0$, lower than  $r$. Let $g(x) := \frac{1}{2}\lambda x^2,$ with $\lambda>0$ the flow of damages induced by carbon emissions. The Principal chooses $Z$ to minimize discounted cost of damages plus payments to the representative Agent of the economy:
+\begin{align}
+ \inf_{Z}  J^P(Z), \quad J^P(Z) := \E\Big[ \int_0^\tau e^{-\rho t} \big[g(X_t)\dd t +  \dd \pi_t \big] \Big].
+\end{align}
+It holds that
+\begin{align}
+ J^P(Z) = \E\Big[ \int_0^\tau e^{-\rho t} \Big\{  \frac12 \lambda X_t^2 + \frac12 (\gamma + \eta_a \sigma^2 e^{-r t}) Z_t^2 \Big\} \dd t\Big].
+\end{align}
+
+The value function at time $v(t,x)$ of the Principal satisfies the PDE
+\begin{align}
+&0
+=
+v_t - \rho v
++\frac{1}{2}\sigma^2 v_{xx}
++ \frac{1}{2}\lambda x^2
++\inf_{z}
+\Big\{\gamma z v_x
++ \frac{1}{2}\big(\gamma+\eta_a\sigma^2 e^{-rt}\big)z^2
+\Big\},
+\quad
+v(t,0) = 0.
+\end{align}
+The minimiser is explicit:
+\begin{align}
+z^*(t,x)
+&=
+- \frac{\gamma}{k(t)}\,v_x(t,x), \quad k(t) := \gamma+\eta_a\sigma^2 e^{-rt}
+\end{align}
+and substituting back yields the scalar non-stationary nonlinear PDE
+\begin{align}
+&0 = v_t   - \rho v  
++\frac{1}{2}\sigma^2 v_{xx}  
++\frac{1}{2}\lambda x^2
+- \frac{1}{2}\frac{\gamma^2}{k(t)}v_x^2,
+\quad
+v(t,0) = 0.
+\end{align}
+
+ \subsection{Numerical illustration}
+We consider the nonlinear PDE on $(t,x)\in[0,\infty)\times(0,\infty)$
+\begin{align}
+0
+&=
+v_t(t,x)-\rho\,v(t,x)
++\frac12\sigma^2 v_{xx}(t,x)
++\frac12\lambda x^2
+-\frac12\frac{\gamma^2}{k(t)}\big(v_x(t,x)\big)^2,
+\qquad
+v(t,0)=0,
+\label{eq:vPDE}
+\end{align}
+where $k(t):=\gamma+\eta_a\sigma^2 e^{-rt}$. Define
+\begin{align}
+\kappa(t):=\frac{\gamma^2}{k(t)},
+\qquad
+a(t):=-\frac{\kappa(t)}{\sigma^2},
+\qquad
+\phi(t,x):=\exp\big(a(t)\,v(t,x)\big).
+\label{eq:CHdef}
+\end{align}
+Then $\phi(t,0)=1$, and a direct computation using
+\begin{align}
+\phi_t=\phi\,(a'v+a v_t),
+\qquad
+\phi_x=\phi\,a v_x,
+\qquad
+\phi_{xx}=\phi\,(a v_{xx}+a^2 v_x^2),
+\label{eq:CHder}
+\end{align}
+shows that the quadratic-gradient term cancels thanks to $a(t)=-\kappa(t)/\sigma^2$, yielding the semilinear equation
+\begin{align}
+0
+&=
+\phi_t(t,x)
++\frac12\sigma^2 \phi_{xx}(t,x)
+-\frac12\frac{\lambda\,\kappa(t)}{\sigma^2}\,x^2\,\phi(t,x)
+-\Big(\rho+\frac{a'(t)}{a(t)}\Big)\phi(t,x)\ln\phi(t,x),
+\qquad
+\phi(t,0)=1.
+\label{eq:phiPDE}
+\end{align}
+Since $\kappa(t)=\gamma^2/k(t)$, one has $\frac{a'(t)}{a(t)}=\frac{\kappa'(t)}{\kappa(t)}=-\frac{k'(t)}{k(t)}$, and therefore
+\begin{align}
+\frac{a'(t)}{a(t)}
+=
+\frac{r\,\eta_a\sigma^2 e^{-rt}}{\gamma+\eta_a\sigma^2 e^{-rt}}.
+\label{eq:aeff}
+\end{align}
+Finally, the inverse transformation reads
+\begin{align}
+v(t,x)=\frac{1}{a(t)}\ln\phi(t,x)
+=
+-\frac{\sigma^2}{\kappa(t)}\ln\phi(t,x)
+=
+-\frac{\sigma^2 k(t)}{\gamma^2}\ln\phi(t,x).
+\label{eq:CHinv}
+\end{align}
+Moreover, if the optimal contract sensitivity is given by the first-order condition
+\begin{align}
+Z^\star(t,x)=-\frac{\gamma}{k(t)}\,v_x(t,x),
+\label{eq:ZFOC}
+\end{align}
+then, using $a(t)=-\kappa(t)/\sigma^2$ and $\phi_x=\phi\,a\,v_x$, we obtain
+\begin{align}
+v_x(t,x)=\frac{1}{a(t)}\frac{\phi_x(t,x)}{\phi(t,x)}
+=-\frac{\sigma^2}{\kappa(t)}\frac{\phi_x(t,x)}{\phi(t,x)}
+=-\frac{\sigma^2 k(t)}{\gamma^2}\frac{\phi_x(t,x)}{\phi(t,x)},
+\end{align}
+and thus,
+\begin{align}
+Z^\star(t,x)=\frac{\sigma^2}{\gamma}\,\frac{\phi_x(t,x)}{\phi(t,x)}.
+\label{eq:Zphi}
+\end{align}
+
+\paragraph{Numerical method and outputs}
+
+We solve \eqref{eq:phiPDE} on a truncated domain $x\in[0,X_{\max}]$ and a large time horizon
+$t\in[0,T]$, using a backward-in-time implicit scheme for the diffusion and the linear potential,
+combined with a Newton step for the local reaction term $-\rho\,\phi\ln\phi$.
+We impose an absorbing boundary at $x=0$ and a (numerically robust) Neumann condition at $x=X_{\max}$.
+
+\hs
+\paragraph{Risk-neutral Agent}
+
+First, we present results in the case where the Agent is risk-neutral, i.e. $\eta_a = 0$. Figure~\ref{fig:phi_v} reports the functions $\phi(0,\cdot)$ and the recovered value function $v(0,\cdot)$.
+Figure~\ref{fig:path_controls} shows a single simulated trajectory of the controlled process together with
+the feedback control and the contract sensitivity. Figure~\ref{fig:payments_costs} displays the cumulative
+payments (both in nominal units and in the Agent numeraire), as well as the discounted decomposition
+between payments and damage costs from the Principal's viewpoint. Finally,
+Figure~\ref{fig:mc_distributions} summarizes Monte--Carlo results: the stopping-time distribution, the
+distribution of discounted cumulative payments, and their joint distribution (scatter and 2D histogram).
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_phi.pdf}
+\caption{Cole--Hopf solution $\phi(0,x)$.}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_v.pdf}
+\caption{Recovered value $v(0,x)$.}
+\end{subfigure}
+\caption{PDE solution at time $t=0$ for $\eta_a=0$.}
+\label{fig:phi_v}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.32\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_X_path.pdf}
+\caption{State path $X_t$.}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.32\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_u_path.pdf}
+\caption{Control $|u_t| = \gamma |Z_t|$.}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.32\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_Z_path.pdf}
+\caption{Contract sensitivity $Z_t$.}
+\end{subfigure}
+\caption{Single-path simulation under the feedback policy implied by the PDE solution.}
+\label{fig:path_controls}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_payments.pdf}
+\caption{Cumulative payments: nominal $\Pi_t$ and Agent-numeraire $\xi_t$.}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_costs.pdf}
+\caption{Principal discounted decomposition: damages vs payments vs total.}
+\end{subfigure}
+\caption{Payments and discounted cost decomposition along one simulated trajectory.}
+\label{fig:payments_costs}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_tau_hist.pdf}
+\caption{Histogram of stopping times $\tau$.}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_pvpay_hist.pdf}
+\caption{Histogram of discounted cumulative payments $\int_0^\tau e^{-\rho t}\,d\Pi_t$.}
+\end{subfigure}
+
+\vspace{1ex}
+
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_joint_scatter.pdf}
+\caption{Joint samples $(\tau,\mathrm{PV}_\Pi)$ (scatter).}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_joint_hist2d.pdf}
+\caption{Joint distribution $(\tau,\mathrm{PV}_\Pi)$ (2D histogram).}
+\end{subfigure}
+\caption{Monte--Carlo output: joint distribution of stopping times and discounted cumulative payments.}
+\label{fig:mc_distributions}
+\end{figure}
+
+\hs
+
+\paragraph{The effect of risk aversion.}
+
+Figure~\ref{fig:eta} reports the comparative statics with respect to the Agent's CARA coefficient $\eta_a$, keeping the discount rates fixed at $r=8\%$ (private discounting) and $\rho=3\%$ (social discounting). Panel (a) shows that the Principal's initial value $v(0,X_0)$ (here evaluated at $X_0=2$~Gt/y) increases with $\eta_a$, as higher risk aversion raises the cost of implementing a given abatement path through incentives. At the same time, panel (b) indicates that the optimal initial incentive rate $Z(0,X_0)$ changes only marginally over the explored range of $\eta_a$; in other words, the contract's risk exposure is adjusted only slightly. 
+
+Panels (c) and (d) clarify why the total cost still rises significantly. Because the payment dynamics contain a risk-compensation term proportional to $\eta_a\sigma^2 Z_t^2$ (a risk premium), the expected discounted payment $\E[Y_\tau]$ increases approximately linearly in $\eta_a$ when $Z_t^2$ is nearly insensitive to $\eta_a$, as observed here. Finally, panel (d) shows that the expected exit time $\E[\tau]$ remains essentially unchanged, which is consistent with the near invariance of the incentives (and hence of the induced effort/control): since the feedback policy varies little with $\eta_a$, the state dynamics and the hitting-time distribution are only weakly affected, while the payment level increases mainly through the risk premium.
+
+\hs
+
+Furthermore, the Figure~\ref{fig:tau-pi-eta} shows the joint distribution of hitting times $\tau$ and payments $Y_\tau$ in the case of a risk-neutral Agent and a strictly risk-averse Agent. When the Agent is risk-neutral, Panel~(a) indicates that the concentration of the most probable situations involves a net-zero reached in 30 years for an expected payment of 10~billion \euro. Whereas when the Agent is highly risk-neutral, this concentration still occurs around a hitting time of 30 years but for a total payment of 36~billions.
+
+\begin{figure}
+
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_veta.pdf}
+\caption{Initial value of the Principal for $X_0=2$~Gt/y.}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_z0eta.pdf}
+\caption{Initial incitive payment rate $Z(0,X_0)$.}
+\end{subfigure}
+
+\vspace{1ex}
+
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_Yeta.pdf}
+\caption{Expected discounted payment $\E[Y_\tau]$.}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_taueta.pdf}
+\caption{Expected hitting time $\E[\tau]$.}
+\end{subfigure}
+
+\caption{Effect of risk-aversion on value function and incentive payment rate}
+\label{fig:eta}
+\end{figure}
+
+\begin{figure}
+
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_joint_kde_contour1.pdf}
+\caption{$\eta_a=0$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig_joint_kde_contour2.pdf}
+\caption{$\eta_a=3$.}
+\end{subfigure}
+
+\caption{Map of the joint distribution of $(\tau,Y_\tau)$ for $\eta_a=0$ and $\eta_a=3$.}
+\label{fig:tau-pi-eta}
+
+\end{figure}
+
+
+\clearpage
+\appendix
+\section{Appendices}
+\subsection{The social planner benchmark} \label{app:social-benchmark}
+
+Let $(W_t)_{t\ge 0}$ be a one-dimensional Brownian motion. The state $X=(X_t)_{t\ge 0}$ starts from
+$X_0=x>0$ and follows a controlled local-volatility geometric diffusion:
+\begin{align*}\label{eq:ND-X-dyn}
+\dd X_t = u_t \dd t  +  \sigma(X_t)\dd W_t,
+\end{align*}
+where $u=(u_t)_{t\ge 0}$ is an admissible progressively measurable control (typically $u_t\in\mathcal U\subseteq\mathbb R$)
+and $\sigma:\mathbb R_+\to\mathbb R_+$ is a given local volatility function.
+
+The stopping time is \emph{exogenous} and defined by the first time $X$ hits the boundary:
+\begin{equation}
+\label{eq:ND-tau}
+\tau \;:=\; \inf\{t\ge 0:\; X_t \le 0\}.
+\end{equation}
+(For the special case $\sigma=\sigma x$, $0$ is typically a natural boundary and $X_t>0$ a.s.\ for all $t$,
+so $\tau=+\infty$ a.s.; the criterion below then becomes an infinite-horizon discounted cost.)
+
+\hs
+
+Given a discount rate $r>0$, a quadratic state cost weight $\lambda>0$, and a quadratic control cost with
+efficiency parameter $\gamma>0$, define the value function
+\begin{equation}
+\label{eq:ND-value}
+v(x)
+\;:=\;
+\inf_{u}\;
+\mathbb E_x\Big[
+\int_0^\tau e^{-rt}
+\Big(
+\frac{\lambda}{2}X_t^2
++
+\frac{1}{2\gamma}u_t^2
+\Big)\,dt
+\Big],
+\qquad x>0.
+\end{equation}
+The boundary condition induced by the exogenous stopping (no terminal payoff) is
+\begin{equation}
+\label{eq:ND-boundary}
+v(0)=0.
+\end{equation}
+
+\hs
+
+On the continuation domain $x>0$, the (formal) stationary HJB equation reads
+\begin{equation}
+\label{eq:ND-HJB}
+r\,v(x)
+=
+\inf_{u\in\mathcal U}
+\left\{
+\frac{\lambda}{2}x^2
++
+\frac{1}{2\gamma}u^2
++
+u\,v'(x)
++
+\frac{1}{2}\sigma^2 v''(x)
+\right\}.
+\end{equation}
+If $\mathcal U=\mathbb R$, the minimizer is explicit:
+\begin{equation}
+\label{eq:ND-u-star}
+u^*(x) \;=\; -\gamma\,v'(x),
+\end{equation}
+and substituting back yields the nonlinear second-order ODE
+\begin{equation}
+\label{eq:ND-ODE-general}
+\frac{1}{2}\sigma^2 v''(x)
+\;-\;
+\frac{\gamma}{2}\big(v'(x)\big)^2
+\;+\;
+\frac{\lambda}{2}x^2
+\;-\;
+r\,v(x)
+\;=\;0,
+\qquad x>0,
+\qquad v(0)=0.
+\end{equation}
+A common selection criterion is to take the nonnegative, nondecreasing solution with growth at most quadratic
+as $x\to\infty$.
+
+\hs
+
+For the geometric local volatility $\sigma=\sigma x$ with $\sigma>0$, the ODE \eqref{eq:ND-ODE-general} becomes
+\begin{equation}
+\label{eq:ND-ODE-geom}
+\frac{1}{2}\sigma^2 x^2 v''(x)
+\;-\;
+\frac{\gamma}{2}\big(v'(x)\big)^2
+\;+\;
+\frac{\lambda}{2}x^2
+\;-\;
+r\,v(x)
+\;=\;0.
+\end{equation}
+A quadratic ansatz $v(x)=A x^2$ satisfies \eqref{eq:ND-ODE-geom} (and $v(0)=0$) if and only if $A$ solves
+\begin{equation}
+\label{eq:ND-Riccati}
+2\gamma A^2 \;+\; (r-\sigma^2)A \;-\; \frac{\lambda}{2} \;=\;0.
+\end{equation}
+The economically relevant (nonnegative) root is
+\begin{equation}
+\label{eq:ND-A}
+A
+=
+\frac{-(r-\sigma^2)+\sqrt{(r-\sigma^2)^2+4\gamma\lambda}}{4\gamma}
+\;\ge\;0,
+\end{equation}
+and the corresponding optimal control is linear in $x$:
+\begin{equation}
+\label{eq:ND-u-star-explicit}
+u^*(x)= -\gamma v'(x)= -2\gamma A\,x.
+\end{equation}
+
+\begin{thebibliography}{100}
+
+\bibitem[Cvitani\'c et al.(2018)]{CPT18}
+J. Cvitani\'c, D. Possama\"i, N. Touzi. Dynamic programming approach to principal--agent problems.
+{Finance and Stochastics}, 22(1):1--37, 2018.
+
+\bibitem[Holmstr\"om and Milgrom(1987)]{HM87}
+B. Holmstr\"om, P. Milgrom. Aggregation and Linearity in the Provision of Intertemporal Incentives.
+{Econometrica}, 55(2):303--328, 1987.
+
+\bibitem[Possama\"i and Touzi(2022)]{PT22}
+D. Possama\"i, N. Touzi. Is there a Golden Parachute in Sannikov's principal-agent problem?
+Working paper, arXiv:2007.05529 (revised Oct 2022).
+
+\bibitem[Lin et al.(2022)]{LRTY22}
+Y. Lin, Z. Ren, N. Touzi, J. Yang. Random Horizon Principal-Agent Problems.
+{SIAM Journal on Control and Optimization}, 60(1):355--384, 2022.
+
+\bibitem[Sannikov(2008)]{Sannikov08}
+Y. Sannikov. A Continuous-Time Version of the Principal--Agent Problem.
+{The Review of Economic Studies}, 75(3):957--984, 2008.
+
+\end{thebibliography}
+
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Principal–Agent (Sannikov / Possamaï–Touzi style) — MINIMISATION convention
+% Running transfer constrained:  pi_t >= 0  (limited liability / no taxation)
+% Quadratic effort cost: c(u) = u^2/(2 gamma)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Optimal incentive in infinite horizon}
+
+Let $(\Omega,\mathcal F,(\mathcal F_t)_{t\ge 0},\mathbb P)$ support a 1D Brownian motion $W$.
+The observable output $X$ satisfies
+\begin{equation}\label{eq:X}
+dX_t = u_t\,dt + \sigma\,dW_t,\qquad \sigma>0.
+\end{equation}
+The Agent chooses the (unobservable) effort $u_t$.
+
+A contract consists of:
+\begin{itemize}
+\item a nonnegative running transfer $\pi=(\pi_t)_{t\ge 0}$, progressively measurable w.r.t.\ $\mathbb F^X$,
+\begin{equation}\label{eq:pi_constraint}
+\pi_t \ge 0 \quad \text{a.s. for all } t\ge 0,
+\end{equation}
+\item a stopping time $\tau$ (chosen by the Principal), and
+\item a terminal transfer $\xi$, $\mathcal F_\tau^X$-measurable.
+\end{itemize}
+
+The Principal minimizes
+\begin{equation}\label{eq:JP}
+J^P(\tau,\pi,\xi)
+=
+\mathbb E\Bigg[
+\int_0^\tau e^{-rt}\Big(\tfrac12\lambda X_t^2+\pi_t\Big)\,dt
++ e^{-r\tau}\,\xi
+\Bigg],
+\qquad r>0,\ \lambda>0,
+\end{equation}
+and the Agent minimizes (given $(\tau,\pi,\xi)$)
+\begin{equation}\label{eq:JA}
+J^A(u;\tau,\pi,\xi)
+=
+\mathbb E\Bigg[
+\int_0^\tau e^{-rt}\Big(c(u_t)-\pi_t\Big)\,dt
+- e^{-r\tau}\,\xi
+\Bigg],
+\qquad
+c(u)=\frac{u^2}{2\gamma},\ \gamma>0.
+\end{equation}
+
+
+Let $V^A(\tau,\pi,\xi):=\inf_u J^A(u;\tau,\pi,\xi)$ be the Agent's minimal cost under the contract.
+A cost-based participation constraint reads
+\begin{equation}\label{eq:PC}
+V^A(\tau,\pi,\xi)\le c_0,
+\end{equation}
+where $c_0$ is the Agent's reservation cost (outside option).
+In the continuation-value representation below, \eqref{eq:PC} becomes a constraint on $Y_0$.
+
+
+Fix $(\tau,\pi,\xi)$. Define the Agent's continuation cost process
+\begin{equation}\label{eq:Ydef}
+Y_t
+:=
+\text{ess}\inf_{(u_s)_{s\in[t,\tau]}}
+\mathbb E_t\Bigg[
+\int_t^\tau e^{-r(s-t)}\big(c(u_s)-\pi_s\big)\,ds
+- e^{-r(\tau-t)}\,\xi
+\Bigg],
+\qquad 0\le t\le \tau,
+\end{equation}
+so that
+\begin{equation}\label{eq:Yterminal}
+Y_\tau = -\,\xi.
+\end{equation}
+In particular, the participation constraint \eqref{eq:PC} becomes
+\begin{equation}\label{eq:PC_Y0}
+Y_0 \le c_0.
+\end{equation}
+
+Under standard admissibility assumptions (martingale representation), one can represent $Y$ through
+a controlled SDE involving a process $Z$:
+\begin{equation}\label{eq:Ydyn}
+dY_t
+=
+\Big(
+rY_t + H(Z_t) - \pi_t
+\Big)\,dt
++\sigma Z_t\,dW_t,
+\qquad t<\tau,
+\end{equation}
+where the (minimisation) Hamiltonian is
+\begin{equation}\label{eq:Hmin}
+H(Z):=\inf_{u\in\mathbb R}\{c(u)-Zu\},
+\end{equation}
+and the Agent's incentive-compatible best response is
+\begin{equation}\label{eq:IC}
+u_t^\ast \in \arg\min_{u\in\mathbb R}\{c(u)-Z_tu\}.
+\end{equation}
+
+For $c(u)=\frac{u^2}{2\gamma}$ one obtains explicitly
+\begin{equation}\label{eq:quad}
+u_t^\ast=\gamma Z_t,
+\qquad
+H(Z)= -\frac{\gamma}{2}Z^2.
+\end{equation}
+Hence, the reduced state dynamics are
+\begin{equation}\label{eq:XY}
+\left\{
+\begin{aligned}
+dX_t &= \gamma Z_t\,dt + \sigma\,dW_t,\\
+dY_t &= \Big(rY_t - \pi_t - \tfrac{\gamma}{2}Z_t^2\Big)\,dt + \sigma Z_t\,dW_t,
+\end{aligned}
+\right.
+\qquad t<\tau,
+\end{equation}
+with $\xi=-Y_\tau$.
+
+
+Using $\xi=-Y_\tau$, the Principal's criterion becomes
+\begin{equation}\label{eq:JP_reduced}
+\mathbb E\Bigg[
+\int_0^\tau e^{-rt}\Big(\tfrac12\lambda X_t^2+\pi_t\Big)\,dt
+- e^{-r\tau}\,Y_\tau
+\Bigg].
+\end{equation}
+Define the Principal value function
+\begin{equation}\label{eq:vdef}
+v(x,y)
+:=
+\inf_{\substack{(\pi,Z),\,\tau\\ \pi_t\ge 0}}
+\mathbb E_{x,y}\Bigg[
+\int_0^\tau e^{-rt}\Big(\tfrac12\lambda X_t^2+\pi_t\Big)\,dt
+- e^{-r\tau}\,Y_\tau
+\Bigg],
+\qquad \text{s.t. } y\le c_0.
+\end{equation}
+
+Immediate stopping yields the obstacle
+\begin{equation}\label{eq:obstacle}
+g(x,y)=-y.
+\end{equation}
+
+
+For $\varphi\in C^2(\mathbb R^2)$, the controlled generator associated with \eqref{eq:XY} is
+\begin{equation}\label{eq:generator}
+\mathcal L^{\pi,Z}\varphi
+=
+(\gamma Z)\,\partial_x\varphi
++\Big(r y - \pi - \tfrac{\gamma}{2}Z^2\Big)\partial_y\varphi
++\frac{\sigma^2}{2}\Big(
+\partial_{xx}\varphi + 2Z\,\partial_{xy}\varphi + Z^2\,\partial_{yy}\varphi
+\Big).
+\end{equation}
+
+
+The dynamic programming principle yields the HJB--QVI:
+\begin{equation}\label{eq:QVI}
+\min\Bigg\{
+v(x,y)-g(x,y),\;
+r\,v(x,y)
+-
+\inf_{\pi\ge 0,\;Z\in\mathbb R}
+\Big[
+\tfrac12\lambda x^2+\pi + \mathcal L^{\pi,Z}v(x,y)
+\Big]
+\Bigg\}=0.
+\end{equation}
+Expanding the operator gives
+\begin{align}\label{eq:QVI_expanded}
+\min\Bigg\{
+&v(x,y)+y,\nonumber\\
+&r v(x,y)
+-\inf_{\pi\ge 0,\;Z}
+\Big[
+\tfrac12\lambda x^2
++ \gamma Z\,v_x
++\Big(r y - \tfrac{\gamma}{2}Z^2\Big)v_y
++\tfrac{\sigma^2}{2}\Big(v_{xx}+2Z v_{xy}+ Z^2 v_{yy}\Big)
++ \pi\,(1-v_y)
+\Big]
+\Bigg\}=0.
+\end{align}
+
+
+For fixed $(x,y)$ and $Z$, the minimization over $\pi\ge 0$ in \eqref{eq:QVI_expanded} concerns
+$\pi(1-v_y)$. Therefore,
+\begin{equation}\label{eq:pi_star}
+\pi^\ast(x,y)=
+\begin{cases}
+0, & \text{if } 1-v_y(x,y) > 0\ \ (\text{i.e. } v_y(x,y)<1),\\[4pt]
+\text{any value in } [0,\infty), & \text{if } v_y(x,y)=1,\\[4pt]
+\text{not finite (ill-posed)}, & \text{if } v_y(x,y)>1.
+\end{cases}
+\end{equation}
+Hence, well-posedness requires the \emph{gradient constraint}
+\begin{equation}\label{eq:vy_le_1}
+v_y(x,y)\le 1
+\quad \text{on the continuation region,}
+\end{equation}
+and the control $\pi$ is used only on the boundary where $v_y=1$ (a Skorokhod-type reflection / singular control
+interpretation).
+
+
+Assume $v$ is smooth at $(x,y)$ in the continuation region and that $v_y(x,y)\le 1$ so that $\pi^*(x,y)=0$
+whenever $v_y(x,y)<1$.
+
+The $Z$-dependent part of the Hamiltonian in \eqref{eq:QVI_expanded} is quadratic:
+\[
+Z\big(\gamma v_x + \sigma^2 v_{xy}\big)
++\frac12 Z^2\big(\sigma^2 v_{yy}-\gamma v_y\big).
+\]
+If
+\begin{equation}\label{eq:Z_convexity}
+\sigma^2 v_{yy}(x,y)-\gamma v_y(x,y)>0,
+\end{equation}
+then the unique minimizer is
+\begin{equation}\label{eq:Zstar}
+Z^*(x,y)
+=
+-\frac{\gamma v_x(x,y)+\sigma^2 v_{xy}(x,y)}
+{\sigma^2 v_{yy}(x,y)-\gamma v_y(x,y)}.
+\end{equation}
+If \eqref{eq:Z_convexity} fails and $Z$ is unconstrained, the infimum over $Z$ is $-\infty$; in that case
+one must restrict admissible effort (e.g.\ bounded $u$) or impose additional constraints ensuring well-posedness.
+
+
+The Principal chooses the initial continuation cost $Y_0=y$ subject to the participation constraint $y\le c_0$.
+In typical second-best solutions (without additional frictions), the constraint binds:
+\begin{equation}\label{eq:PC_binding}
+Y_0=c_0,
+\end{equation}
+since increasing the Agent's cost (up to the reservation level) benefits the Principal.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ 
+
+\section{Decentralization with a deterministic carbon price}
+
+We now consider a decentralized version of the decarbonization problem.
+A social planner sets a deterministic carbon price trajectory
+$p(t)$ over the horizon $[0,T]$.
+Taking this price path as given, a representative firm chooses its abatement
+effort in order to minimize its expected compliance and abatement costs.
+
+Emissions evolve according to
+\[
+dX_t = -u_t\,dt + \sigma\,dW_t,
+\qquad X_0 = x_0,
+\]
+where $u_t \ge 0$ denotes the abatement effort at time $t$.
+The firm faces a flow cost equal to the carbon payment $p(t)X_t$
+and a quadratic abatement cost
+\[
+c(u_t)=\frac{1}{2}\,\frac{u_t^2}{\gamma}.
+\]
+
+The firm’s problem is therefore
+\[
+\inf_{(u_t)}
+\;
+\E\Big[
+\int_0^T
+\Big(
+p(t)\,X_t
++\frac{1}{2}\,\frac{u_t^2}{\gamma}
+\Big)dt
+\Big].
+\]
+
+To derive the optimality condition, we compute the G\^ateaux derivative
+of the objective functional.
+Let $u^\varepsilon = u + \varepsilon v$ be a perturbation of the control,
+with $v$ an admissible direction.
+The corresponding variation of the state satisfies
+\[
+\delta X_t
+:= \frac{d}{d\varepsilon}X_t^{u^\varepsilon}\Big|_{\varepsilon=0}
+= -\int_0^t v_s\,ds,
+\]
+since the diffusion term is unaffected by the perturbation.
+
+Differentiating the objective functional yields
+\[
+\frac{d}{d\varepsilon}
+J(u+\varepsilon v)\Big|_{\varepsilon=0}
+=
+\E\Big[
+\int_0^T
+\Big(
+\frac{u_t}{\gamma}\,v_t
++ p(t)\,\delta X_t
+\Big)dt
+\Big].
+\]
+Using Fubini’s theorem, the term involving $\delta X_t$ can be rewritten as
+\[
+\int_0^T p(t)\,\delta X_t\,dt
+=
+-\int_0^T v_t
+\Big(
+\int_t^T p(s)\,ds
+\Big)dt.
+\]
+Therefore,
+\[
+\frac{d}{d\varepsilon}
+J(u+\varepsilon v)\Big|_{\varepsilon=0}
+=
+\E\Big[
+\int_0^T
+\Big(
+\frac{u_t}{\gamma}
+-
+\int_t^T p(s)\,ds
+\Big)
+v_t\,dt
+\Big].
+\]
+
+This identifies the G\^ateaux derivative as the process
+\[
+J'(u)_t
+=
+\frac{u_t}{\gamma}
+-
+\int_t^T p(s)\,ds.
+\]
+Since the objective is strictly convex in $u$, the first-order condition
+is both necessary and sufficient for optimality.
+The optimal abatement policy therefore satisfies
+\[
+J'(u^\star)_t=0
+\qquad\Longleftrightarrow\qquad
+u_t^\star
+=
+\gamma
+\int_t^T p(s)\,ds.
+\]
+
+The optimal abatement effort is deterministic and depends only on the
+cumulative future carbon price.
+In particular, higher expected future carbon prices lead firms to increase
+current abatement, illustrating how intertemporal price signals shape
+decarbonization incentives.
+
+ 
+
+\section{A stock--flow model}
+
+We now enrich the basic setup by distinguishing between the \emph{flow} of emissions and the
+\emph{stock} of greenhouse gases accumulated in the atmosphere.
+Let $X_t$ denote the (anthropogenic) emissions rate at time $t$ (e.g.\ in tons/year) and let $K_t$
+denote the associated atmospheric stock (or an ``anthropogenic excess stock'').
+A minimal stock--flow representation is
+\[
+dK_t = (-\delta K_t + X_t)\,dt,
+\qquad
+dX_t = -u_t\,dt + \sigma\,dW_t,
+\]
+where $\delta>0$ is an effective removal rate (capturing the net action of natural sinks),
+$u_t\ge 0$ is abatement effort, and $\sigma>0$ measures exogenous uncertainty in the emissions flow.
+
+The planner trades off the social cost of the stock against abatement costs. We consider the objective
+\[
+J(u)
+=
+\E\Big[
+\int_0^T
+\Big(
+\frac{1}{2}\lambda K_t^2 + \frac{1}{2}\frac{u_t^2}{\gamma}
+\Big)dt
+\;+\;
+\frac{1}{2}\frac{\lambda}{r}X_T^2
+\Big],
+\qquad
+\inf_{u} J(u),
+\]
+where $\lambda>0$ scales the marginal damages of the stock and $\gamma>0$ measures abatement efficiency.
+The last term is a reduced-form way to account for the persistence of emissions beyond the horizon:
+if after time $T$ emissions were held approximately constant at $X_T$ and future damages were discounted at rate $r>0$,
+then
+\[
+\int_T^\infty \frac{1}{2}\lambda e^{-r(t-T)}X_T^2\,dt
+=
+\frac{1}{2}\frac{\lambda}{r}X_T^2,
+\]
+which provides an interpretation for the terminal penalty.\footnote{We intentionally do not discount the flow costs
+on $[0,T]$ to keep the focus on order-of-magnitude effects over $T=25$ years; incorporating discounting on the
+interval is straightforward and does not change the linear--quadratic structure.}
+
+\paragraph{HJB formulation and Riccati system.}
+Let $V(t,k,x)$ be the value function at time $t$ given $(K_t,X_t)=(k,x)$, with terminal condition
+\[
+V(T,k,x)=\frac{1}{2}\frac{\lambda}{r}x^2.
+\]
+The Hamilton--Jacobi--Bellman equation is
+\[
+\partial_t V
++
+\inf_{u\in\mathbb{R}}
+\left\{
+\frac{1}{2}\lambda k^2 + \frac{1}{2}\frac{u^2}{\gamma}
++(-\delta k + x)\,\partial_k V
+-u\,\partial_x V
++\frac{1}{2}\sigma^2\,\partial_{xx}V
+\right\}
+=0.
+\]
+The minimization is quadratic in $u$, and the pointwise first-order condition yields
+\[
+\frac{u}{\gamma}-\partial_x V(t,k,x)=0
+\qquad\Longrightarrow\qquad
+u^\star(t,k,x)=\gamma\,\partial_x V(t,k,x).
+\]
+Substituting back gives
+\[
+\partial_t V
++\frac{1}{2}\lambda k^2
++(-\delta k + x)\,\partial_k V
++\frac{1}{2}\sigma^2\,\partial_{xx}V
+-\frac{\gamma}{2}\big(\partial_x V\big)^2
+=0,
+\qquad
+V(T,k,x)=\frac{1}{2}\frac{\lambda}{r}x^2.
+\]
+
+Because the model is linear--quadratic with additive Gaussian noise, it is natural to seek a quadratic value function
+\[
+V(t,k,x)=\frac{1}{2}\begin{pmatrix}k\\x\end{pmatrix}^{\top}
+P(t)\begin{pmatrix}k\\x\end{pmatrix}
++g(t),
+\qquad
+P(t)=
+\begin{pmatrix}
+a(t) & b(t)\\
+b(t) & c(t)
+\end{pmatrix},
+\qquad
+g(T)=0,
+\]
+with terminal condition
+\[
+P(T)=
+\begin{pmatrix}
+0 & 0\\
+0 & \lambda/r
+\end{pmatrix}.
+\]
+Writing the controlled drift in matrix form with $Z_t=(K_t,X_t)^\top$,
+\[
+dZ_t=(AZ_t+Bu_t)\,dt+\Sigma\,dW_t,
+\qquad
+A=
+\begin{pmatrix}
+-\delta & 1\\
+0 & 0
+\end{pmatrix},
+\quad
+B=
+\begin{pmatrix}
+0\\
+-1
+\end{pmatrix},
+\quad
+\Sigma=
+\begin{pmatrix}
+0\\
+\sigma
+\end{pmatrix},
+\]
+one obtains the matrix Riccati equation
+\[
+-P'(t)=Q+A^\top P(t)+P(t)A-P(t)BR^{-1}B^\top P(t),
+\qquad
+P(T)=
+\begin{pmatrix}
+0 & 0\\
+0 & \lambda/r
+\end{pmatrix},
+\]
+where
+\[
+Q=
+\begin{pmatrix}
+\lambda & 0\\
+0 & 0
+\end{pmatrix},
+\qquad
+R=\frac{1}{\gamma}.
+\]
+In components, $(a,b,c)$ satisfy the coupled ODEs
+\[
+\begin{cases}
+a'(t)=2\delta\,a(t)+\gamma\,b(t)^2-\lambda,\\[3pt]
+b'(t)=-a(t)+\delta\,b(t)+\gamma\,b(t)c(t),\\[3pt]
+c'(t)=-2b(t)+\gamma\,c(t)^2,
+\end{cases}
+\qquad
+a(T)=0,\;\;b(T)=0,\;\;c(T)=\lambda/r.
+\]
+The scalar term $g$ captures the contribution of diffusion and satisfies
+\[
+-g'(t)=\frac{1}{2}\sigma^2\,c(t),
+\qquad g(T)=0,
+\qquad\Longrightarrow\qquad
+g(t)=\frac{1}{2}\sigma^2\int_t^T c(s)\,ds.
+\]
+
+\paragraph{Optimal feedback control.}
+With the quadratic ansatz, $\partial_x V(t,k,x)=b(t)k+c(t)x$, so the optimal abatement effort is linear in the state:
+\[
+u_t^\star=\gamma\big(b(t)K_t+c(t)X_t\big).
+\]
+This policy is intuitive: abatement responds both to current emissions $X_t$ and to the accumulated stock $K_t$,
+with time-varying shadow values encoded in the Riccati coefficients $(b(t),c(t))$.
+
+
+
+\subsection{Linear stock damages}
+
+To improve tractability while retaining the stock--flow structure, we replace the quadratic running
+damage in $K_t$ by a linear term. This can be interpreted as a local linearization of climate damages
+around a reference stock level, or as a reduced-form representation of a constant marginal damage of
+the atmospheric stock over the horizon.
+
+The state dynamics are
+\[
+dK_t = (-\delta K_t + X_t)\,dt,
+\qquad
+dX_t = -u_t\,dt + \sigma\,dW_t,
+\qquad (K_0,X_0)=(k_0,x_0),
+\]
+and the planner minimizes
+\[
+J(u)=
+\E\Big[
+\int_0^T\Big(\ell K_t + \frac12\frac{u_t^2}{\gamma}\Big)dt
++\frac12\frac{\lambda}{r}X_T^2
+\Big],
+\qquad \inf_u J(u),
+\]
+where $\ell>0$ is a constant marginal damage per unit of stock, $\gamma>0$ measures abatement efficiency,
+and the terminal penalty $\frac12\frac{\lambda}{r}X_T^2$ is a proxy for discounted post-horizon damages.
+
+\paragraph{HJB equation and optimality condition.}
+Let $V(t,k,x)$ be the value function. The terminal condition is
+\[
+V(T,k,x)=\frac12\frac{\lambda}{r}x^2.
+\]
+The HJB equation reads
+\[
+\partial_t V
++\inf_{u\in\mathbb{R}}
+\left\{
+\ell k + \frac12\frac{u^2}{\gamma}
++(-\delta k + x)\,\partial_k V
+-u\,\partial_x V
++\frac12\sigma^2\,\partial_{xx}V
+\right\}=0.
+\]
+The minimization is strictly convex in $u$, and the pointwise first-order condition yields
+\[
+\frac{u}{\gamma}-\partial_x V(t,k,x)=0
+\qquad\Longrightarrow\qquad
+u^\star(t,k,x)=\gamma\,\partial_x V(t,k,x).
+\]
+Substituting back gives the reduced HJB
+\[
+\partial_t V
++\ell k
++(-\delta k + x)\,\partial_k V
++\frac12\sigma^2\,\partial_{xx}V
+-\frac{\gamma}{2}\big(\partial_x V\big)^2
+=0,
+\qquad
+V(T,k,x)=\frac12\frac{\lambda}{r}x^2.
+\]
+
+\paragraph{Quadratic--affine ansatz.}
+Because the running cost is linear in $k$ and quadratic in $u$, it is natural to look for a value function
+that is quadratic in $x$ and affine in $k$:
+\[
+V(t,k,x)=\frac12 c(t)x^2 + b(t)kx + f(t)k + \alpha(t)x + g(t),
+\]
+with terminal conditions
+\[
+c(T)=\lambda/r,
+\qquad
+b(T)=f(T)=\alpha(T)=g(T)=0.
+\]
+For this ansatz,
+\[
+\partial_x V = c(t)x + b(t)k + \alpha(t),
+\qquad
+\partial_{xx}V=c(t),
+\qquad
+\partial_kV=b(t)x+f(t).
+\]
+Hence the optimal feedback control is affine:
+\[
+u_t^\star
+=
+\gamma\big(c(t)X_t + b(t)K_t + \alpha(t)\big).
+\]
+
+\paragraph{ODE system for the coefficients.}
+Plugging the ansatz into the reduced HJB and matching coefficients in $(k,x)$ yields the system
+\[
+\begin{cases}
+c'(t)=\gamma\,c(t)^2-2b(t),\\[3pt]
+b'(t)=\delta\,b(t)+\gamma\,b(t)c(t),\\[3pt]
+f'(t)=\delta\,f(t)+\ell+\gamma\,b(t)\alpha(t),\\[3pt]
+\alpha'(t)= -f(t)+\gamma\,c(t)\alpha(t),\\[3pt]
+g'(t)= -\dfrac12\sigma^2 c(t)+\dfrac{\gamma}{2}\alpha(t)^2,
+\end{cases}
+\qquad
+\begin{aligned}
+&c(T)=\lambda/r,\\
+&b(T)=f(T)=\alpha(T)=g(T)=0.
+\end{aligned}
+\]
+The key simplification relative to the quadratic-stock model is that there is no $k^2$ term in $V$:
+the coefficient of $k^2$ remains identically zero. As a result, the Riccati structure reduces to a
+lower-dimensional coupled subsystem for $(b,c)$, while $(f,\alpha,g)$ then solve linear (or at most
+quadratic) equations given $(b,c)$.
+
+\paragraph{Comments.}
+The coupled pair $(b,c)$ generally does not admit a closed-form solution, but it is a smooth two-dimensional
+backward ODE system and is straightforward to integrate numerically. Once $(b,c)$ are known, the remaining
+equations for $(f,\alpha,g)$ can be solved backward as well. The optimal policy remains affine in $(K_t,X_t)$,
+capturing the intuitive feature that abatement increases when either current emissions are high or the
+accumulated stock is large.
+
+
+  
+ 
+ 
+ 

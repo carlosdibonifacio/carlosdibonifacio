@@ -1,0 +1,187 @@
+\documentclass[11pt,a4paper]{article}
+
+% Essential packages for mathematics
+\usepackage{amsmath}    % Enhanced math formatting
+\usepackage{amssymb}    % Additional math symbols
+\usepackage{amsthm}     % Theorem environments
+\usepackage{mathtools}  % Additional math tools
+\usepackage{physics}    % Physics notation
+\usepackage{geometry}   % Page layout
+\usepackage{graphicx}   % Include images
+\usepackage{hyperref}   % Clickable references
+\usepackage{cleveref}   % Smart references
+\usepackage{xcolor}
+\usepackage{enumitem}   % Enhanced control of list environments
+
+% Page geometry
+\geometry{
+    margin=2.5cm,
+    includeheadfoot
+}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% Custom commands for common mathematical notation
+\newcommand{\R}{\mathbb{R}}        % Real numbers
+\newcommand{\N}{\mathbb{N}}        % Natural numbers
+\newcommand{\Z}{\mathbb{Z}}        % Integers
+\newcommand{\Q}{\mathbb{Q}}        % Rational numbers
+\newcommand{\C}{\mathbb{C}}        % Complex numbers
+\newcommand{\E}{\mathbb{E}}        % Expectation
+\newcommand{\Prob}{\mathbb{P}}     % Probability
+
+% Document begins
+\begin{document}
+
+\title{Exam solutions - Continuous Time Finance}
+\author{}
+\date{\today}
+
+\maketitle
+
+
+\section{Answers to the questions}
+\begin{enumerate}[label=Q\arabic*., start=1]
+    \item 0.5.
+    \item 8.5.
+    \item $v_u=17$ , $v_d=0$.
+    \item $v_{uu}=34, v_{ud}=0, v_{dd} =0$.
+    \item $\frac{17}{40}$.
+    \item $\Delta_u=17/24$ and $\Delta_d=0$.
+    \item -34.
+    \item $c_u=-68$ and $c_d = 0$.
+    \item $\mathbb{E}[B_t] = 0$.
+    \item $\mathbb{E}[B_t^2]=t$.
+    \item Give $\langle B \rangle_t = t$.
+    \item Give $\mathbb{E}[B_t B_{t+s}]$ with $s > 0 = \min(t,t+s)=t$.
+    \item Give $\mathbb{V}[B_s + B_t] = \mathbb{V}[B_s] + \mathbb{V}[B_t] + 2 \text{Cov}[B_s,B_t]= t + s + 2\min(t,s) $.
+    \item Give $\mathbb{E}[Z_T] = 1$.
+    \item Give $\mathbb{E}[Z_T B_T]=\sigma T$.
+    \item Give $\mathbb{E}[Z_T^2]=e^{T \sigma^2}$.
+    \item Give $\mathbb{V}[Z_T]=e^{T \sigma^2}-1$.
+    \item Give $dY_t=(k(b-Y_t) - \frac{1}{2}\sigma^2)dt + \sigma dB_t, \quad Y_t = \ln(S_t)$.
+    \item Give $S_t = e^{ \bigg( \ln(S_0)e^{-\kappa t} + (b-\frac{\sigma^2}{2\kappa})(1-e^{\kappa t}) + \sigma \int_0^t e^{-\kappa (t-s)}dB_s \bigg)}$.
+    \item Give $\mathbb{E}[S_t]= e^{ \bigg(  \ln S_0  e^{-\kappa t} + (b-\frac{\sigma^2}{2\kappa})(1-e^{-\kappa t}) + \frac{1}{2} \frac{\sigma^2}{2\kappa}(1-e^{-2\kappa t}) \bigg)}$.
+    \item Give $\lim_{t \to +\infty} \mathbb{E}[S_t] = e^{(b - \frac{\sigma^2}{4\kappa})}$.
+    \item Give $\mathbb{V}[S_t]$. We can use the fact that $S_t=e^{Y_t}$ is a log-normal random variable and we have the general formula that $\mathbb{V}(S_t)=\mathbb{E}[S_t]^2(e^{(\sigma_y^2)}-1)$ where $\sigma_y^2= \frac{\sigma^2}{2 \kappa}(1-e^{ -2 \kappa t})$. We can use the result for $\mathbb{E}[S_t]$.
+    \item Give $dX_t = [e^{ B_t(\gamma + \alpha) } + \frac{1}{2} \alpha^2 X_t]dt + \alpha X_t dB_t$.
+    \item Give $\mathbb{E}[X_t] = \frac{e^{(\frac{1}{2}\alpha^2 + C)t} - e^{\frac{1}{2}\alpha^2 t}}{C}$ where $C=\alpha \gamma + \frac{1}{2}\gamma^2 = \frac{1}{2}\gamma(2\alpha + \gamma)$.
+    \item Give $dY_t = e^{\kappa t} \kappa B_t dt + \sigma e^{\kappa t} d B_t$.
+    \item Give $X_t = e^{-\kappa t}x + \kappa \int_0^t e^{-\kappa(t-s)}B_s ds + \sigma \int_0^t e^{-\kappa(t-s)}dB_s$ or also
+    \begin{equation*}
+        X_t = e^{-\kappa t}x + B_t + (\sigma - 1 )\int_0^t e^{-\kappa(t-s)}dB_s,
+    \end{equation*}
+    using Ito on the expression $e^{-\kappa s}B_s$.
+    \item Give $\mathbb{E}[X_t] = e^{-\kappa t}x$.
+    \item Give $\mathbb{V}[X_t] = t + \frac{(\sigma -1)^2}{2 \kappa} (1-e^{-2kt}) + \frac{2(\sigma-1)}{\kappa}(1-e^{-\kappa t})$.
+    \item Give $\lim_{t \to +\infty} \mathbb{V}[X_t] = \infty$.
+    \item Give $dX_t = -\kappa X_t dt + \sigma dB_t$.
+    \item Give $dY_t = Y_t (-\kappa X_t + \frac{1}{2}\sigma^2)dt + \sigma Y_t dB_t$ with $Y_t = e^{X_t}$.
+    \item Give $\mathbb{E}[F(t, T)] = f(T)$.
+    \item Give $F(t, T) = f(T) + \int_0^t \sigma e^{-\kappa(T-s)dB_s}$.
+    \item Give $dS_t = (f'(t) + \kappa f(t) - \kappa S_t )dt + \sigma dB_t$.
+    \item Give $\lim_{t \to +\infty} \mathbb{E}[S_t] = \lim_{t \rightarrow \infty} f(t) $.
+    \item Write the HJB equation satisfied by the value function $v(t, x)$ of this problem.
+        \textcolor{black}{The HJB is given by
+        \begin{equation*}
+        \begin{cases}
+                    -\partial_t v(t,x) - \sup_\theta \bigg\{\partial_x v(t,x) (\mu \theta + r(1-\theta))x + \partial_{xx}v(t,x)\frac{1}{2}\sigma^2 \theta^2 x^2\bigg\} = 0,\\
+                    V(T,x)=x^\gamma. 
+        \end{cases}
+        \end{equation*}
+    }
+    \item Give the ODE satisfied by $f$.
+    \textcolor{black}{The ODE sastifies for the function f(t) is given by:
+    \begin{equation*}
+        f'(t) + f(t)\rho =0, 
+    \end{equation*}
+    where the expression $\rho$ is defined by:
+    \begin{equation*}
+        \rho = \gamma \sup_\theta \bigg\{  (\mu \theta + r(1-\sigma)) + (\gamma-1) \frac{1}{2} \sigma^2 \theta^2 \bigg\}.
+    \end{equation*}}
+    \item The function $f(t)$ is given:
+    \textcolor{black}{
+    \begin{equation*}
+        \begin{cases}
+            f(t)= e^{\rho(T-t)},\\
+            f(T)= 1.
+        \end{cases}
+    \end{equation*}
+    }
+    \item Give the optimal trading strategy $\theta^*$.
+    \textcolor{black}{
+    \begin{equation*}
+                \theta^* = \Bigg( \frac{\gamma-\mu}{\sigma^2(\gamma-1)}\Bigg)
+    \end{equation*}}
+    \item Give $x^* \in \mathbb{R}$ such that $U(x^*) = \mathbb{E}[U(X_T^{\theta^*})]$.
+    \textcolor{black}{ 
+    \begin{equation*}
+        U(x^*) = \mathbb{E}[U(X_T^{\theta^*})] = f(T)x^\gamma
+    \end{equation*}
+    That is 
+    \begin{equation*}
+        x^\gamma = e^{\rho T} x^\gamma \Rightarrow x^* = e^{\frac{\rho}{\gamma} T}x
+    \end{equation*}}
+\end{enumerate}
+
+
+% \section{Explanations}
+% \noindent \textbf{Q.9}: $\E[B_t]=0$
+
+% \textcolor{black}{This can be obtained from the standard definition of Brownian Motion. Since $B_0=0 \quad \mathbb{P}-a.s.$, and Brownian motion incremenets are independe with distribution $ \mathcal{N}(0,t-s)$, we have that:
+% \begin{equation*}
+%     \mathbb{E}[B_t - B_0] \sim \mathcal{N}(0,t-0) \Rightarrow \mathbb{E}[B_t]  \sim \mathcal{N}(0,t-0)  \Rightarrow \E[B_t] = 0
+% \end{equation*}}
+
+% \noindent \textbf{Q.10}: $\E[B_t^2]=t$
+
+% \textcolor{black}{Again, this can be obtained from the standard definition of Brownian Motion. Since $B_0=0 \quad \mathbb{P}-a.s.$, and Brownian motion incremenets are independe with distribution $ \mathcal{N}(0,t-s)$, we have that:
+% \begin{equation*}
+%     \mathbb{E}[(B_t - B_0)(B_t - B_0)] \sim \mathcal{N}(0,(t-0)(t-0)) 
+% \end{equation*}
+% and since $B_0$ is almost surely 0, we have that:
+% \begin{equation*}
+%     \mathbb{E}[(B_t - B_0)(B_t - B_0)] = \mathbb{E}[B_t^2] - 2\mathbb{E}[B_tB_0] + \mathbb{E}[B_0^2] = \mathbb{E}[B_t^2]
+% \end{equation*}}
+% \noindent \textbf{Q.11}: $ \langle B \rangle_t  = t$
+
+% \textcolor{black}{Is a very well known result that the quadratic variation of a Brownian motion is equal to $t$\footnote{For the interested student, check the Levy characterization of Brownian Motion}. Such result can be obtained directly from the definition of quadratic variation for Brownian motion partitions:
+% \begin{equation*}
+%     \lim \sum_i^n (B_{t_{i+1}} - B_{t_i})^2 = (B_{t_{i+1}} - B_{t_i})(B_{t_{i+1}} - B_{t_i})
+% \end{equation*}
+% }
+% \noindent \textbf{Q.12}: $ \mathbb{E}[B_tB_{t+s}]=\min(t,t+s)=t$
+
+% \begin{equation*}
+%      \mathbb{E}[(B_t - B_0)(B_{t+s} - B_0)] \sim \mathcal{N}(0,(t-0)(t+s-0))     
+% \end{equation*}
+
+% \noindent \textbf{Q.13}: $\mathbb{V}(B_t + B_s)=t + s + \min(s,t)$
+% \textcolor{blue}{
+% \begin{equation*}
+% \mathbb{V}(B_t + B_s) = \mathbb{V}(B_t) + \mathbb{V}(B_s) + 2\text{Cov}(B_t,B_s) = t + s + 2\min(s,t)
+% \end{equation*}}
+
+% \noindent \textbf{Q.14}: Consider $Z_T = e^{\sigma B_T - \frac{1}{2}\sigma^2 T}$. Compute $\mathbb{E}[Z_T]$.
+% \textcolor{blue}{
+% Is a very well known result that for a Gaussian Random variable and some $\lambda \in \mathbb{R}$ we have
+% \begin{equation*}
+%     \mathbb{E}[e^{\lambda x}] = e^{\frac{\lambda^2}{2}}
+% \end{equation*}
+% Such equality is an application of the Expectation for Gaussian variable and exponential rules
+% \begin{equation*}
+%    \mathbb{E}[Z_T] = \frac{1}{\sqrt{2 \pi T}} \int_{-\infty}^{\infty} e^{\sigma x - \frac{1}{2}\sigma^2 T}  e^{-\frac{x^2}{2T}} dx
+% \end{equation*}}
+
+
+\end{document}

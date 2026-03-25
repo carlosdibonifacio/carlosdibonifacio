@@ -1,0 +1,41 @@
+\documentclass{article}
+
+% Load the xcolor package with additional color options
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+
+\begin{document}
+
+\section{Text Color Examples}
+
+% Basic color commands
+{\color{red} This text is red}
+
+{\color{blue} This text is blue}
+
+% Using predefined colors from dvipsnames
+{\color{RoyalBlue} This text is Royal Blue}
+
+{\color{ForestGreen} This text is Forest Green}
+
+% Colored text in math mode
+This is a math equation with color: ${\color{red} x^2} + {\color{blue} y^2} = {\color{green} z^2}$
+
+% Using \textcolor command (alternative syntax)
+\textcolor{purple}{This is purple text}
+
+% Creating custom colors
+\definecolor{myorange}{RGB}{255,127,0}
+\textcolor{myorange}{This is my custom orange}
+
+% Color intensity
+{\color{red!50} This is 50\% red}
+
+{\color{blue!30} This is 30\% blue}
+
+% Mixing colors
+{\color{blue!50!red} This is a 50-50 mix of blue and red}
+
+% Background color using colorbox
+\colorbox{yellow!20}{This text has a light yellow background}
+
+\end{document}

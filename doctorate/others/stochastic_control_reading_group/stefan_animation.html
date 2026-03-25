@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stefan Problem: Ice Melting Animation</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    overflow: hidden;
+  }
+  canvas { border-radius: 12px; }
+</style>
+</head>
+<body>
+<canvas id="c" width="900" height="700"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+// Animation state
+let time = 0;
+const duration = 8000; // full cycle ms
+let lastTs = 0;
+
+// Boundary position: starts at x=450, moves left to x=180
+const bStart = 450;
+const bEnd = 180;
+
+// Bubbles
+const bubbles = [];
+for (let i = 0; i < 20; i++) {
+  bubbles.push({
+    x: 500 + Math.random() * 340,
+    y: 80 + Math.random() * 320,
+    r: 2 + Math.random() * 5,
+    speed: 0.3 + Math.random() * 0.5,
+    phase: Math.random() * Math.PI * 2
+  });
+}
+
+// Ice crystals
+const crystals = [];
+for (let i = 0; i < 15; i++) {
+  crystals.push({
+    x: 80 + Math.random() * 350,
+    y: 80 + Math.random() * 310,
+    size: 8 + Math.random() * 14,
+    rot: Math.random() * Math.PI
+  });
+}
+
+// Heat particles
+const heatParticles = [];
+for (let i = 0; i < 25; i++) {
+  heatParticles.push({
+    x: 500 + Math.random() * 340,
+    y: 80 + Math.random() * 320,
+    speed: 1.5 + Math.random() * 2,
+    size: 2 + Math.random() * 3
+  });
+}
+
+function easeInOut(t) {
+  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+}
+
+function drawCrystal(x, y, size, rot, alpha) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(rot);
+  ctx.strokeStyle = `rgba(255,255,255,${alpha * 0.25})`;
+  ctx.lineWidth = 1;
+  // Six-armed snowflake
+  for (let i = 0; i < 6; i++) {
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, -size);
+    // Small branches
+    ctx.moveTo(0, -size * 0.5);
+    ctx.lineTo(size * 0.25, -size * 0.7);
+    ctx.moveTo(0, -size * 0.5);
+    ctx.lineTo(-size * 0.25, -size * 0.7);
+    ctx.stroke();
+    ctx.rotate(Math.PI / 3);
+  }
+  ctx.restore();
+}
+
+function draw(timestamp) {
+  if (!lastTs) lastTs = timestamp;
+  const dt = timestamp - lastTs;
+  lastTs = timestamp;
+  time = (time + dt) % duration;
+
+  // Progress 0 -> 1 (melting)
+  const rawP = time / duration;
+  // Smooth ping-pong: melt then refreeze
+  let p;
+  if (rawP < 0.45) {
+    p = easeInOut(rawP / 0.45);
+  } else if (rawP < 0.55) {
+    p = 1;
+  } else if (rawP < 0.95) {
+    p = 1 - easeInOut((rawP - 0.55) / 0.4);
+  } else {
+    p = 0;
+  }
+
+  const boundary = bStart + (bEnd - bStart) * p;
+
+  // Clear
+  ctx.fillStyle = '#1a1a2e';
+  ctx.fillRect(0, 0, 900, 700);
+
+  // ======== MAIN BLOCK ========
+  const blockTop = 60;
+  const blockBot = 410;
+  const blockLeft = 60;
+  const blockRight = 840;
+  const blockH = blockBot - blockTop;
+
+  // Ice region
+  const iceGrd = ctx.createLinearGradient(blockLeft, 0, boundary, 0);
+  iceGrd.addColorStop(0, '#e8f4fd');
+  iceGrd.addColorStop(0.5, '#d0eafc');
+  iceGrd.addColorStop(1, '#b8ddfb');
+  ctx.fillStyle = iceGrd;
+  ctx.fillRect(blockLeft, blockTop, boundary - blockLeft, blockH);
+
+  // Ice crystals (fade out as boundary passes them)
+  crystals.forEach(cr => {
+    const alpha = cr.x < boundary - 20 ? 1 : cr.x < boundary ? (boundary - cr.x) / 20 : 0;
+    if (alpha > 0) {
+      drawCrystal(cr.x, cr.y, cr.size, cr.rot + time * 0.0001, alpha);
+    }
+  });
+
+  // Water region
+  const waterGrd = ctx.createLinearGradient(boundary, 0, blockRight, 0);
+  waterGrd.addColorStop(0, '#2980b9');
+  waterGrd.addColorStop(0.5, '#2471a3');
+  waterGrd.addColorStop(1, '#1a5276');
+  ctx.fillStyle = waterGrd;
+  ctx.fillRect(boundary, blockTop, blockRight - boundary, blockH);
+
+  // Water ripples
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1;
+  for (let row = 0; row < 18; row++) {
+    const y = blockTop + 10 + row * 20;
+    ctx.beginPath();
+    for (let x = boundary + 10; x < blockRight - 5; x += 2) {
+      const wave = Math.sin((x + time * 0.03) * 0.05) * 3;
+      if (x === boundary + 10) ctx.moveTo(x, y + wave);
+      else ctx.lineTo(x, y + wave);
+    }
+    ctx.stroke();
+  }
+
+  // Bubbles in water
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+  ctx.lineWidth = 0.8;
+  bubbles.forEach(b => {
+    const bx = b.x + Math.sin(time * 0.002 + b.phase) * 5;
+    let by = b.y - (time * b.speed * 0.01) % 350;
+    if (by < blockTop) by += blockH;
+    if (bx > boundary + 10 && bx < blockRight - 5) {
+      ctx.beginPath();
+      ctx.arc(bx, by, b.r, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  });
+
+  // Transition zone (soft blend at boundary)
+  const transW = 30;
+  const transGrd = ctx.createLinearGradient(boundary - transW / 2, 0, boundary + transW / 2, 0);
+  transGrd.addColorStop(0, 'rgba(184,221,251,0.4)');
+  transGrd.addColorStop(0.5, 'rgba(93,173,226,0.3)');
+  transGrd.addColorStop(1, 'rgba(41,128,185,0.1)');
+  ctx.fillStyle = transGrd;
+  ctx.fillRect(boundary - transW / 2, blockTop, transW, blockH);
+
+  // ======== FREE BOUNDARY (wavy yellow line) ========
+  ctx.beginPath();
+  ctx.moveTo(boundary, blockTop);
+  for (let y = blockTop; y <= blockBot; y += 2) {
+    const wave = Math.sin(y * 0.04 + time * 0.003) * 4 + Math.sin(y * 0.08 - time * 0.002) * 2;
+    ctx.lineTo(boundary + wave, y);
+  }
+  ctx.strokeStyle = '#f1c40f';
+  ctx.lineWidth = 3.5;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // ======== HEAT FLOW ARROWS ========
+  const arrowYs = [150, 235, 320];
+  arrowYs.forEach(ay => {
+    // Animated dashes moving left
+    const offset = (time * 0.15) % 40;
+    ctx.setLineDash([12, 8]);
+    ctx.lineDashOffset = offset;
+    ctx.beginPath();
+    ctx.moveTo(blockRight - 10, ay);
+    ctx.lineTo(boundary + 25, ay);
+    ctx.strokeStyle = 'rgba(231,76,60,0.6)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Arrowhead
+    ctx.fillStyle = '#e74c3c';
+    ctx.beginPath();
+    ctx.moveTo(boundary + 18, ay);
+    ctx.lineTo(boundary + 30, ay - 5);
+    ctx.lineTo(boundary + 30, ay + 5);
+    ctx.closePath();
+    ctx.fill();
+  });
+
+  // Heat particles (moving left toward boundary)
+  ctx.fillStyle = 'rgba(231,76,60,0.4)';
+  heatParticles.forEach(hp => {
+    let px = hp.x - (time * hp.speed * 0.05) % (blockRight - boundary);
+    if (px < boundary + 10) px += (blockRight - boundary - 20);
+    if (px > boundary + 10 && px < blockRight) {
+      const glow = 1 + Math.sin(time * 0.005 + hp.x) * 0.3;
+      ctx.beginPath();
+      ctx.arc(px, hp.y, hp.size * glow, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  });
+
+  // Heat source (right wall glow)
+  const heatWallGrd = ctx.createLinearGradient(blockRight - 15, 0, blockRight + 5, 0);
+  heatWallGrd.addColorStop(0, 'rgba(231,76,60,0)');
+  heatWallGrd.addColorStop(0.5, 'rgba(231,76,60,0.5)');
+  heatWallGrd.addColorStop(1, 'rgba(231,76,60,0.8)');
+  ctx.fillStyle = heatWallGrd;
+  ctx.fillRect(blockRight - 10, blockTop, 16, blockH);
+
+  // Pulsing glow on heat wall
+  const pulse = 0.5 + Math.sin(time * 0.004) * 0.2;
+  ctx.fillStyle = `rgba(231,76,60,${pulse})`;
+  ctx.fillRect(blockRight - 2, blockTop, 8, blockH);
+
+  // ======== BOUNDARY MOVEMENT ARROW ========
+  if (p < 0.95 && rawP < 0.5) {
+    ctx.fillStyle = '#f1c40f';
+    ctx.globalAlpha = 0.8;
+    // Arrow pointing left below the block
+    const arrowY = blockBot + 18;
+    ctx.beginPath();
+    ctx.moveTo(boundary - 15, arrowY);
+    ctx.lineTo(boundary + 5, arrowY - 7);
+    ctx.lineTo(boundary + 5, arrowY + 7);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = '#f1c40f';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(boundary + 5, arrowY);
+    ctx.lineTo(boundary + 50, arrowY);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  // ======== BLOCK BORDER ========
+  ctx.strokeStyle = '#555';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(blockLeft, blockTop, blockRight - blockLeft, blockH);
+
+  // ======== TEMPERATURE PROFILE ========
+  const profTop = 465;
+  const profBot = 525;
+  const profLeft = 100;
+  const profRight = 800;
+
+  // Axes
+  ctx.strokeStyle = '#666';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(profLeft, profBot);
+  ctx.lineTo(profRight, profBot);
+  ctx.moveTo(profLeft, profBot);
+  ctx.lineTo(profLeft, profTop);
+  ctx.stroke();
+
+  // 0°C line
+  const zeroY = profBot - 20;
+  ctx.strokeStyle = 'rgba(241,196,15,0.4)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([6, 4]);
+  ctx.beginPath();
+  ctx.moveTo(profLeft, zeroY);
+  ctx.lineTo(profRight, zeroY);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Boundary position on profile
+  const profBoundary = profLeft + (boundary - blockLeft) / (blockRight - blockLeft) * (profRight - profLeft);
+  ctx.strokeStyle = 'rgba(241,196,15,0.5)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 3]);
+  ctx.beginPath();
+  ctx.moveTo(profBoundary, profTop);
+  ctx.lineTo(profBoundary, profBot + 5);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Temperature curve
+  const tempGrd = ctx.createLinearGradient(profLeft, 0, profRight, 0);
+  tempGrd.addColorStop(0, '#85c1e9');
+  tempGrd.addColorStop(0.5, '#f9e79f');
+  tempGrd.addColorStop(1, '#e74c3c');
+  ctx.strokeStyle = tempGrd;
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.beginPath();
+
+  for (let x = profLeft; x <= profRight; x += 2) {
+    const frac = (x - profLeft) / (profRight - profLeft);
+    const bFrac = (profBoundary - profLeft) / (profRight - profLeft);
+    let temp;
+    if (frac < bFrac - 0.03) {
+      // Ice: below zero, slightly sloping
+      temp = zeroY + 5 + (bFrac - frac) * 15;
+    } else if (frac < bFrac + 0.03) {
+      // Transition: sharp rise
+      const t = (frac - (bFrac - 0.03)) / 0.06;
+      const iceT = zeroY + 5 + 0.03 * 15;
+      const waterT = zeroY - 15;
+      temp = iceT + (waterT - iceT) * easeInOut(t);
+    } else {
+      // Water: above zero, rising
+      const waterFrac = (frac - bFrac - 0.03) / (1 - bFrac - 0.03);
+      temp = zeroY - 15 - waterFrac * 25;
+    }
+    if (x === profLeft) ctx.moveTo(x, temp);
+    else ctx.lineTo(x, temp);
+  }
+  ctx.stroke();
+
+  // ======== LEGEND BOX ========
+  const legY = 560;
+  ctx.fillStyle = 'rgba(15,21,56,0.92)';
+  ctx.strokeStyle = '#334';
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, 40, legY, 820, 120, 10);
+
+  // Title
+  ctx.fillStyle = 'white';
+  ctx.font = 'bold 15px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Stefan Problem: Ice Melting into Water', 450, legY + 24);
+
+  ctx.textAlign = 'left';
+  ctx.font = '12px Georgia, serif';
+  ctx.fillStyle = '#aaa';
+
+  // Left column
+  // Ice swatch
+  const iceSwGrd = ctx.createLinearGradient(65, 0, 100, 0);
+  iceSwGrd.addColorStop(0, '#e8f4fd');
+  iceSwGrd.addColorStop(1, '#b8ddfb');
+  ctx.fillStyle = iceSwGrd;
+  roundRect(ctx, 65, legY + 40, 35, 12, 2, true);
+  ctx.fillStyle = '#aaa';
+  ctx.fillText('Ice (solid phase, T < 0°C)', 112, legY + 51);
+
+  // Water swatch
+  const watSwGrd = ctx.createLinearGradient(65, 0, 100, 0);
+  watSwGrd.addColorStop(0, '#2980b9');
+  watSwGrd.addColorStop(1, '#1a5276');
+  ctx.fillStyle = watSwGrd;
+  roundRect(ctx, 65, legY + 65, 35, 12, 2, true);
+  ctx.fillStyle = '#aaa';
+  ctx.fillText('Water (liquid phase, T > 0°C)', 112, legY + 76);
+
+  // Right column
+  // Free boundary
+  ctx.strokeStyle = '#f1c40f';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(480, legY + 46);
+  ctx.lineTo(515, legY + 46);
+  ctx.stroke();
+  ctx.fillStyle = '#aaa';
+  ctx.fillText('Free boundary s(t) (melting front)', 530, legY + 51);
+
+  // Heat flux
+  ctx.strokeStyle = '#e74c3c';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(480, legY + 71);
+  ctx.lineTo(510, legY + 71);
+  ctx.stroke();
+  ctx.fillStyle = '#e74c3c';
+  ctx.beginPath();
+  ctx.moveTo(515, legY + 71);
+  ctx.lineTo(507, legY + 67);
+  ctx.lineTo(507, legY + 75);
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle = '#aaa';
+  ctx.fillText('Heat flux (drives the phase transition)', 530, legY + 76);
+
+  // Subtitle
+  ctx.fillStyle = '#f1c40f';
+  ctx.font = 'italic 12px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Heat flows into ice — the free boundary s(t) moves as ice melts. The Stefan condition governs the boundary speed.', 450, legY + 106);
+
+  requestAnimationFrame(draw);
+}
+
+function roundRect(ctx, x, y, w, h, r, fillOnly) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+  ctx.fill();
+  if (!fillOnly) ctx.stroke();
+}
+
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+{
+  "main": {
+    "id": "f9105d5945b7b4a0",
+    "type": "split",
+    "children": [
+      {
+        "id": "122b91247c6784ff",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9522bbe6f98db5ae",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Insurance/Pasted image 20260219225358.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20260219225358"
+            }
+          },
+          {
+            "id": "d67c60ed1af74e38",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Phd Projects - list.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Phd Projects - list"
+            }
+          },
+          {
+            "id": "b44d9ff9cbb159ea",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.12.4"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8d39f49441d94084",
+    "type": "split",
+    "children": [
+      {
+        "id": "9822171021cb284b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e00d03304a552d04",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "e671a5483ddd9c2c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "a3c52152fa9a7d0d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "f35f6f0f90161179",
+    "type": "split",
+    "children": [
+      {
+        "id": "a0e7014f26621016",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b90820edacad63bc",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Credibility/ideas.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for ideas"
+            }
+          },
+          {
+            "id": "8dfeebd06f1a0402",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Credibility/ideas.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from ideas"
+            }
+          },
+          {
+            "id": "9ecafb098b18ee72",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "47436a18d870294e",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "60518f920dc1f822",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Credibility/ideas.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of ideas"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "b44d9ff9cbb159ea",
+  "lastOpenFiles": [
+    "Insurance/Ideas.md",
+    "Phd Projects - list.md",
+    "Insurance/Pasted image 20260219225358.png",
+    "Phd Projects.md",
+    "Phd Projects",
+    "Insurance/Pasted image 20260219225249.png",
+    "RBSDE and Optimal stopping - characterization of the boundary via comparison and other results for BSDE..md",
+    "Idea -  A model for emerging technology bubbles..md",
+    "Credibility/Notes.md",
+    "Insurance/Pasted image 20260220132322.png",
+    "comments - deep MC.md",
+    "courses/Real analysis.md",
+    "courses",
+    "Credibility/Pasted image 20260209133441.png",
+    "Credibility/Notes meeting.md",
+    "Credibility/Pasted image 20260209133602.png",
+    "Credibility/Pasted image 20260209133601.png",
+    "Untitled.canvas",
+    "Insurance",
+    "Credibility/Notes meeting..md",
+    "credibility.md",
+    "Credibility",
+    "insurance.md"
+  ]
+}

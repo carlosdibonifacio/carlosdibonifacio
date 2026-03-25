@@ -1,0 +1,82 @@
+\documentclass[11pt,a4paper]{article}
+
+% Essential packages for mathematics
+\usepackage{amsmath}    % Enhanced math formatting
+\usepackage{amssymb}    % Additional math symbols
+\usepackage{amsthm}     % Theorem environments
+\usepackage{mathtools}  % Additional math tools
+\usepackage{physics}    % Physics notation
+\usepackage{geometry}   % Page layout
+\usepackage{graphicx}   % Include images
+\usepackage{hyperref}   % Clickable references
+\usepackage{cleveref}   % Smart references
+
+% Page geometry
+\geometry{
+    margin=2.5cm,
+    includeheadfoot
+}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% Custom commands for common mathematical notation
+\newcommand{\R}{\mathbb{R}}        % Real numbers
+\newcommand{\N}{\mathbb{N}}        % Natural numbers
+\newcommand{\Z}{\mathbb{Z}}        % Integers
+\newcommand{\Q}{\mathbb{Q}}        % Rational numbers
+\newcommand{\C}{\mathbb{C}}        % Complex numbers
+\newcommand{\E}{\mathbb{E}}        % Expectation
+\newcommand{\Prob}{\mathbb{P}}     % Probability
+
+% Document begins
+\begin{document}
+
+\title{Title of Your Mathematical Document}
+\author{Your Name}
+\date{\today}
+
+\maketitle
+
+\begin{abstract}
+Your abstract goes here.
+\end{abstract}
+
+\section{Introduction}
+Your introduction goes here.
+
+\section{Mathematical Content}
+% Example of mathematical environments
+\begin{theorem}
+    Let $f: \R \to \R$ be a continuous function. Then...
+\end{theorem}
+
+\begin{proof}
+    Your proof goes here...
+\end{proof}
+
+\begin{example}
+    Consider the function $f(x) = x^2$. Then...
+\end{example}
+
+% Example of equation environments
+\begin{equation}
+    \int_a^b f(x)\,dx = F(b) - F(a)
+\end{equation}
+
+\begin{align}
+    (a + b)^2 &= (a + b)(a + b) \\
+    &= a^2 + ab + ba + b^2 \\
+    &= a^2 + 2ab + b^2
+\end{align}
+
+\end{document}

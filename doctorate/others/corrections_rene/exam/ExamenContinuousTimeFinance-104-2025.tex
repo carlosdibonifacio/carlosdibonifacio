@@ -1,0 +1,239 @@
+\documentclass[article,11pt]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath, latexsym, amsfonts, amssymb, amsthm}
+
+\usepackage{exercise}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{caption}
+
+
+\setlength{\oddsidemargin}{5mm}
+\setlength{\evensidemargin}{5mm}
+\setlength{\textwidth}{152mm}
+\setlength{\headheight}{0mm}
+\setlength{\headsep}{12mm}
+\setlength{\topmargin}{0mm}
+\setlength{\textheight}{220mm}
+\setcounter{secnumdepth}{2}
+
+%\doublespacing
+
+
+\numberwithin{equation}{section}
+
+\newenvironment{Proof}{\removelastskip\par\medskip   % inizio e fine dimostrazione
+\noindent{\em Proof.}
+\rm}{\penalty-20\null\hfill$\square$\par\medbreak}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{hypothesis}{Hypothesis}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{observation}[theorem]{Observation}
+
+
+\newcommand{\B}{\overline B}
+
+\newcommand{\un}{\underline}
+\newcommand{\ga}{\alpha}
+\newcommand{\gb}{\beta}
+\newcommand{\gga}{\gamma}            % \gg already exists...
+\newcommand{\gG}{\Gamma}
+\newcommand{\gd}{\delta}
+\newcommand{\gD}{\Delta}
+\newcommand{\gep}{\varepsilon}       % \ge already exists...
+\newcommand{\gz}{\zeta}
+\newcommand{\gt}{\vartheta}
+\newcommand{\gk}{\kappa}
+\newcommand{\gl}{\lambda}
+\newcommand{\gL}{\Lambda}
+\newcommand{\gr}{\rho}
+\newcommand{\gvr}{\varrho}
+\newcommand{\gs}{\sigma}
+\newcommand{\gS}{\Sigma}
+\newcommand{\gp}{\varphi}
+\newcommand{\gP}{\Phi}
+\newcommand{\go}{\omega}
+\newcommand{\gO}{\Omega}
+
+\newcommand{\bbeta}{\it B}
+
+\newcommand{\cA}{{\ensuremath{\mathcal A}} }
+\newcommand{\cB}{{\ensuremath{\mathcal B}} }
+\newcommand{\cF}{{\ensuremath{\mathcal F}} }
+\newcommand{\cP}{{\ensuremath{\mathcal P}} }
+\newcommand{\cE}{{\ensuremath{\mathcal E}} }
+\newcommand{\cf}{{\ensuremath{\mathcal f}} }
+\newcommand{\cH}{{\ensuremath{\mathcal H}} }
+\newcommand{\cG}{{\ensuremath{\mathcal G}} }
+\newcommand{\cI}{{\ensuremath{\mathcal I}} }
+\newcommand{\cJ}{{\ensuremath{\mathcal J}} }
+\newcommand{\cC}{{\ensuremath{\mathcal C}} }
+\newcommand{\cN}{{\ensuremath{\mathcal N}} }
+\newcommand{\cO}{{\ensuremath{\mathcal O}} }
+\newcommand{\cL}{{\ensuremath{\mathcal L}} }
+\newcommand{\cT}{{\ensuremath{\mathcal T}} }
+\newcommand{\cD}{{\ensuremath{\mathcal D}} }
+\newcommand{\cS}{{\ensuremath{\mathcal S}} }
+\newcommand{\cX}{{\ensuremath{\mathcal X}} }
+\newcommand{\cY}{{\ensuremath{\mathcal Y}} }
+\newcommand{\cZ}{{\ensuremath{\mathcal Z}} }
+
+\newcommand{\bA}{{\ensuremath{\mathbf A}} }
+\newcommand{\bF}{{\ensuremath{\mathbf F}} }
+\newcommand{\bP}{{\ensuremath{\mathbf P}} }
+\newcommand{\bE}{{\ensuremath{\mathbf E}} }
+\newcommand{\bH}{{\ensuremath{\mathbf H}} }
+\newcommand{\bC}{{\ensuremath{\mathbf C}} }
+\newcommand{\bN}{{\ensuremath{\mathbf N}} }
+\newcommand{\bL}{{\ensuremath{\mathbf L}} }
+\newcommand{\bT}{{\ensuremath{\mathbf T}} }
+\newcommand{\bD}{{\ensuremath{\mathbf D}} }
+\newcommand{\bq}{{\ensuremath{\mathbf q}} }
+\newcommand{\bp}{{\ensuremath{\mathbf p}} }
+\newcommand{\bn}{{\ensuremath{\mathbf n}} }
+\newcommand{\bm}{{\ensuremath{\mathbf m}} }
+\newcommand{\bv}{{\ensuremath{\mathbf v}} }
+%\newcommand{\bo}{{\bf 1}}
+
+\newfont{\indic}{bbmss12}
+
+\def\bo#1{\hbox{{\indic 1}$_{#1}$}}
+
+\newcommand{\hf}{{\frac{1}{2}}}
+
+\newcommand{\E}{{\ensuremath{\mathbb E}} }
+\newcommand{\Q}{{\ensuremath{\mathbb Q}} }
+
+\newcommand{\bbA}{{\ensuremath{\mathbb A}} }
+\newcommand{\bbB}{{\ensuremath{\mathbb B}} }
+\newcommand{\bbC}{{\ensuremath{\mathbb C}} }
+\newcommand{\bbD}{{\ensuremath{\mathbb D}} }
+\newcommand{\bbE}{{\ensuremath{\mathbb E}} }
+\newcommand{\bbF}{{\ensuremath{\mathbb F}} }
+\newcommand{\bbG}{{\ensuremath{\mathbb G}} }
+\newcommand{\bbH}{{\ensuremath{\mathbb H}} }
+\newcommand{\bbI}{{\ensuremath{\mathbb I}} }
+\newcommand{\bbJ}{{\ensuremath{\mathbb J}} }
+\newcommand{\bbK}{{\ensuremath{\mathbb K}} }
+\newcommand{\bbL}{{\ensuremath{\mathbb L}} }
+\newcommand{\bbM}{{\ensuremath{\mathbb M}} }
+\newcommand{\bbN}{{\ensuremath{\mathbb N}} }
+\newcommand{\N}{{\ensuremath{\mathbb N}} }
+\newcommand{\bbO}{{\ensuremath{\mathbb O}} }
+\newcommand{\bbP}{{\ensuremath{\mathbb P}} }
+\newcommand{\bbR}{{\ensuremath{\mathbb R}} }
+\newcommand{\R}{{\ensuremath{\mathbb R}} }
+\newcommand{\bbS}{{\ensuremath{\mathbb S}} }
+\newcommand{\bbT}{{\ensuremath{\mathbb T}} }
+\newcommand{\bbU}{{\ensuremath{\mathbb U}} }
+\newcommand{\V}{{\ensuremath{\mathbb V}} }
+\newcommand{\bbW}{{\ensuremath{\mathbb W}} }
+\newcommand{\bbX}{{\ensuremath{\mathbb X}} }
+\newcommand{\bbY}{{\ensuremath{\mathbb Y}} }
+\newcommand{\Z}{{\ensuremath{\mathbb Z}} }
+\newcommand{\myeqnarray}[1]{
+  \begingroup
+  \jot=#1pt
+  \arraycolsep=2pt
+  \begin{eqnarray}}
+\newcommand{\beqnarray}{\myeqnarray{3}}
+\newcommand{\eeqnarray}{\end{eqnarray}\endgroup}
+\newcommand{\ba}{\begin{array}{cc}}
+\newcommand{\ea}{\end{array}}
+
+\newcounter{qst}
+\newcounter{asw}
+
+\newcommand{\vs}{\vspace{3mm}}
+
+\newcommand{\myQ}{\stepcounter{qst} {\bf Q\theqst}:\hspace{2mm}}
+\newcommand{\myA}{\stepcounter{asw} {\bf Q\theasw}:\hspace{2mm}}
+
+\newcommand{\1}{{\bf 1}}
+
+\newcommand{\dd}{\mathrm d }
+
+
+\date{}
+\hyphenpenalty=10000
+\begin{document}
+{\bf  Master 104} -- {\bf  Continuous Time Finance} -- 
+{\bf  Exam - October, 24$^{\text{\rm th}}$ 2025.}\\
+
+\vspace{-0.2cm}
+\noindent No documents allowed. No electronic device of any kind allowed (cell phone, electronic calculator...). The exam lasts 2 hours. You can write your answers in French or in English. {\bf For each question, recall the number of the question and write \underline{only the result}. Do not write any justifications nor intermediate computations. Do not leave drafts on your paper.}
+ 
+\vs
+
+\noindent In all the exam $\V[X]$ denotes the variance of $X$, $(B_t)$ is a standard Brownian motion under~$\bbP$ and $x^+ = \max(0,x)$.
+
+
+\vs
+
+\noindent Consider the binomial market model with time horizon $T=1$, $N=2$ periods of time, probability $p=0.2$ that the price moves up with a rate $u=1.2$ and $1-p$ that it moves down with a rate $d=0.8$. The risk--free rate $r=0$ and the initial risky asset price $S_0 = 100$. 
+Consider the options payoff $\phi(S_0,\ldots,S_T) = (S_T -K)^+$ where $K=110.$  Give
+\myQ the value of the risk-neutral probability denoted $q$, \myQ the price denoted $v_0$ of the claim $\phi$, \myQ  the prices $v_{u}$ and $v_d$ of the claim at time $t_1$, \myQ  the prices $v_{uu}$ and $v_{ud}$ and $v_{dd}$ of the claim at time $t_2$, \myQ  the delta of the claim $\Delta_0$ at time $t=0$, \myQ  the deltas of the claim $\Delta_u$ and $\Delta_d$ at time $t=1$, \myQ  the amount of cash held in the strategy portfolio $c_0$ at initial time, \myQ  the amount of cash the amounts of cash  $c_u$ and $c_d$  in the strategy portfolio at time $t_1$.
+
+\vs
+
+
+\noindent Give \myQ $\E[B_t]$,  \myQ $\E[B_t^2]$, \myQ $\langle B\rangle_t$, \myQ $\E[B_t B_{t+s}]$ with $s>0$, \myQ $\V[B_s +B_t]$.
+
+\vs
+
+\noindent Consider $Z_T := e^{\sigma B_T -\frac12 \sigma^2 T}$. Give \myQ $\E[Z_T],$ \myQ  $\E[Z_T B_T]$. \myQ $\E[Z_T^2]$.
+\myQ~$\V[Z_T].$
+
+\vs
+
+\noindent Consider the  stochastic differential equation $\dd S_t = \kappa (b - \ln S_t) S_t \dd t + \sigma S_t \dd B_t,$ with $S_0 = s_0  >0$, $\kappa>0$, $b>0$ and $\sigma>0$. Let $Y_t =\ln(S_t)$. Give \myQ  $\dd Y_t$, \myQ $S_t$, \myQ $\E[S_t]$, \myQ $\lim_{t\to +\infty} \E[S_t]$. \myQ $\V[S_t]$.
+
+\vs
+
+\noindent Consider $X_t = e^{\alpha B_t} \int_0^t e^{\gamma B_s} ds$ where $\alpha$, $\gamma$ are two real numbers. Give \myQ  $\dd X_t$, \myQ  $\E\big[X_t\big]$. 
+
+\vs
+
+\noindent Consider $\dd X_t = \kappa ( B_t - X_t) \dd t + \sigma \dd B_t$, $X_0=x$,  and $\kappa,\sigma>0.$  
+Denote $Y_t = e^{\kappa t} X_t$.  Give \myQ  $\dd Y_t$, \myQ  $X_t$, \myQ  $\E[X_t]$, \myQ  $\V[X_t]$, \myQ  $\lim_{t\to +\infty} \V[X_t]$.
+ 
+ \vs
+
+\noindent Consider $X_t = e^{-\kappa t} \int_0^t \sigma e^{ \kappa s} \dd B_s$.   \myQ Give $\dd X_t$. Let $Y_t = e^{X_t}$. \myQ Give $\dd Y_t$.  Let $F(t,T)$ the futures price at time $t$ for delivery at $T$. Consider $\dd F(t,T) = \sigma e^{-\kappa(T-t)}  \dd B_t$, with $t \in (0,T)$ and initial condition $F(0,T) = f(T)>0$ for all $T\ge 0$, $f$ differentiable. \myQ  Give $\E[F(t,T)]$, \myQ Give $F(t,T)$. Let $S_t = F(t,t)$. Give \myQ  $\dd S_t$, \myQ  $\lim_{t\to +\infty} \E[S_t]$.
+
+\vs
+
+\noindent Consider the maximisation of expected utility of the terminal wealth $\sup_{\theta}\E\big[U(X_T)\big]$~where $U(x) := x^\gamma$ with $\gamma \in (0,1)$ and $\dd X_t =  [\mu \theta_t + r(1-\theta_t)] X_t \dd t + \sigma \theta_t X_t \dd B_t$ with $\mu>r>0$ and $\sigma>0$ and $X_0 = x>0$.
+  \myQ Write the HJB equation satisfied by the value function $v(t,x)$ of this problem. Assume $v(t,x) = f(t) x^\gamma$. \myQ Give the ODE satisfied by $f$. \myQ Give $f(t)$. \myQ Give the optimal trading strategy $\theta^\ast$. \myQ Give $x^\ast \in \R$ such that $U(x^\ast) = \E[ U(X_T^{\theta^\ast})]$.
+
+\end{document}
+
+ 
+\vs
+
+
+\vs
+
+\noindent Let $\gamma, \hat x, \sigma, \lambda>0$. Consider the {\em static} optimisation problem 
+\[\displaystyle{\sup_{q \in \R} \E\Big[ \int_0^T q ( P_t + \frac12 \gamma q) dt + \lambda (q T - \hat x)^2\Big]}\]
+ with $dP_t = \sigma P_t dB_t$, $P_0 = p$. Give \myQ $q^\star$ the optimal solution of this optimisation problem.
+
+\vs
+
+
+
+
+ 

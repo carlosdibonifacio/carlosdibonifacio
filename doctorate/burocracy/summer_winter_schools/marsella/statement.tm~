@@ -1,0 +1,68 @@
+<TeXmacs|2.1.4>
+
+<style|letter>
+
+<\body>
+  <\strong>
+    <\with|par-sep|1fn>
+      <strong|Statement of Interest> - CEMRACS 2026\ 
+    </with>
+  </strong>
+
+  <\with|par-par-sep|0fn|par-sep|0.8fn>
+    I am a doctoral student in Applied Mathematics at CREST\UENSAE, Paris,
+    working under the supervision of Prof. Peter Tankov (CREST\UENSAE) and
+    Prof. René Aïd (PSL\UDauphine). My research interests lie at the
+    intersection of applied mathematics and climate macroeconomics, with a
+    particular focus on stochastic control, stochastic filtering, and
+    mean-field game methods. My objective is to develop models of dynamic and
+    stochastic climate economies that improve the understanding of how
+    heterogeneity and partial information operate as propagation mechanisms
+    of climate change and to quantify these effects in order to inform policy
+    recommendations.
+
+    A central theme of my research interests is the role of heterogeneity and
+    interaction upon agents and the enviroment in amplify climate-related
+    damages and shaping aggregate outcomes. Mean-field games and mean-field
+    control provide a natural framework to study such relantionships. At the
+    same time, climate change is inherently uncertain and risky: agents must
+    make decisions under incomplete information, which can significantly
+    alter the nature of equilibrium outcomes compared to the full-information
+    case. This is the motivation of using partial information in my research.
+    These features \V heterogeneity, interaction, and partial information \V
+    dramatically increase model complexity, motivating the development and
+    application of new analytical and numerical methods, which are also a
+    important part of my research interests.
+
+    Because my research focuses on modeling climate-economic interactions
+    using these mathematical tools, it is essential for me to develop a
+    deeper and more rigorous understanding of how the climate system
+    functions, how it can be modeled and simulated, and how its dynamics feed
+    back into economic enviroment. My primary motivation for applying to the
+    Summer School is therefore to strengthen this knowdlege by learning from
+    leading experts working at the interface of climate science, applied
+    mathematics and finance and economics. I expect that period at CEMRACS
+    will help me build a more coherent and consistent basis for my current
+    research and inspire new methodological and applied research directions.\ 
+
+    Beyond the academic content, I see this workshop as a unique opportunity
+    to connect with young researchers from around the world who share similar
+    interests. Sharing with this community will allow me to better understand
+    the key open questions in climate economics, learn about emerging
+    modeling approaches and computational techniques, and establish potential
+    collaborations for my future research career.
+  </with>
+</body>
+
+<\initial>
+  <\collection>
+    <associate|font|roman>
+    <associate|font-base-size|11>
+    <associate|font-family|rm>
+    <associate|math-font|roman>
+    <associate|page-medium|paper>
+    <associate|page-screen-margin|false>
+    <associate|par-first|1tab>
+    <associate|par-sep|1fn>
+  </collection>
+</initial>

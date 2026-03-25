@@ -1,0 +1,111 @@
+%----------------------------------------------------------------------------------------
+%    PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usetheme{SimplePlus}
+
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{graphicx} % Allows including images
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage[svgnames]{xcolor}
+\usepackage{tcolorbox}
+\usetikzlibrary{arrows.meta}
+\tcbuselibrary{skins} % L
+% Allows the use of \toprule, \midrule and \bottomrule in tables
+% --- Define the colors from the image ---
+% headerblue: The dark blue of the title bar
+% bodyblue: The light blue/purple of the box content area
+\definecolor{headerblue}{HTML}{2A4B7C}
+\definecolor{bodyblue}{HTML}{F0F4FA}
+
+% --- Define the new box environment ---
+% We'll call it 'propositionbox'
+% It takes 1 argument, which will be the title (e.g., "Proposition" or "Lemma")
+\newtcolorbox{propositionbox}[1]{
+  enhanced,
+  colback=bodyblue,      % Background color of the box body
+  colframe=headerblue,     % Color of the frame
+  boxrule=0.5pt,           % Thickness of the frame
+  arc=3mm,                 % Rounded corners
+  
+  skin=titlehead,          % Use the 'titlehead' skin for the title bar
+  colbacktitle=headerblue,   % Background color of the title bar
+  coltitle=white,            % Color of the title text
+  fonttitle=\bfseries,       % Make the title text bold
+  title=#1,                  % Set the title from the first argument
+  
+  % --- Adjust padding ---
+  boxsep=1mm,              % Padding around the content
+  left=4mm,                % Left inner padding
+  right=4mm,               % Right inner padding
+  top=2mm,                 % Top inner padding (below title)
+  bottom=2mm,              % Bottom inner padding
+  
+  % --- Adjust title bar padding ---
+  toptitle=2.5mm,          % Padding above title text
+  bottomtitle=2.5mm,       % Padding below title text
+  lefttitle=4mm,           % Padding to the left of title text
+}
+%----------------------------------------------------------------------------------------
+%    TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{\large The monotone follower problem in stochastic decision theory.
+ \\ \small by Ioannis Karatzas}
+\subtitle{}
+
+\author{Carlos Di Bonifacio}
+
+\institute
+{
+   ENSAE % Your institution for the title page
+}
+\date{\today} % Date, can be changed to a custom date
+
+%----------------------------------------------------------------------------------------
+%    PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{frame}
+    % Print the title page as the first slide
+    \titlepage
+\end{frame}
+
+
+%------------------------------------------------
+
+\begin{frame}[]
+    \begin{enumerate}
+        \item The stochastic control problem of the firm $i$ is:
+        \begin{align*}
+    \sup_{\tau^i \in \mathcal{T}^i} \mathbb{E} \Bigg[ &\int_0^{\tau^i \wedge T} e^{- \rho s - \lambda^i \int_0^s (\overline{p}_u-p_u)^+du} \Big(X_s^i + \lambda^i G(s,X_s^i)(\overline{p}_s - p_s)^+\Big) \,ds \\
+    & \quad + \mathbf{1}_{ \{ \tau^i < T \} } e^{-\rho \tau^i - \lambda^i \int_0^{\tau^i} (\overline{p}_u-p_u)^+du} \Big(-K + G(\tau^i,X_{\tau^i}^i)\Big) \Bigg],
+     \end{align*}
+     \begin{equation*}
+    \frac{ \mathrm{d} X_s^i}{ X_s^i} = (\mu^i - c)\mathrm{d}s + \nu^i \mathrm{d} B_s^i + \nu \mathrm{d}W_s
+    \end{equation*}
+    \end{enumerate}
+\end{frame}
+
+
+
+
+
+
+
+%------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

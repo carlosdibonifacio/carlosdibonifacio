@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\tmmathbf}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+%%%%%%%%%% End TeXmacs macros
+
+\begin{document}
+
+\title{Calcul stochastique pour la finance 2025}
+
+\maketitle
+
+Q.1 $\mathbb{E} [B_t] = 0, \mathbb{V} \tmop{ar} [B_t] = t$
+
+Q.2 $\mathbb{E} [B_t^4] = 3 t^2$
+
+Q.3 $\mathbb{E} [B_s  B_t] = s$
+
+Q.4  P ($B_t > a$)$= \frac{1}{\sqrt{2 \pi t }} \int_a^{\infty} e^{\frac{-
+y^2}{2 t}} d y$
+
+Q.5 $\mathbb{C} \tmop{ov} (B_t - B_s, B_t - B_u)$=0
+
+Q.6 $\mathbb{E} \left[ \int_{0 }^t s d B_s \right] = 0.$
+
+Q.7  Var($\int_{0 }^t B_s d B_s$)$= \frac{ t^2}{2}$
+
+Q.8 $\mathbb{E} \left[ B_t \int_{0 }^t s d B_s \right] = \frac{ t^2}{2}$
+
+Q.9 $\int_0^t f (s) d B_s \sim \mathcal{N} \left( 0, \int_0^t f (s)^2 d s
+\right)$
+
+Q.10 $\mathbb{E} \left[ \left( \int_0^t B_s d s \right)^2 \right] = \frac{
+t^3}{3}$
+
+Q.11 $d (B_t)^2 = 2 B_t d B_t + d t$
+
+Q.12 $d (e^{\alpha B_t})  = \alpha e^{\alpha B_t} d B_t + \frac{\alpha^2}{2}
+e^{\alpha B_t} d t$
+
+Q.13 $d (t B_t)  = B_t d t + t d B_t$
+
+Q.14 $d (\ln S_t)  = \left( \mu - \frac{\sigma^2}{2} \right) d t + \sigma d
+B_t $
+
+Q.15 $\mathbb{E} [\ln S_t] = \tmop{lnS}_0 + \left( \mu - \frac{\sigma^2}{2}
+\right) t$
+
+Q.16 $X_t = X_0 \exp \left\{ \left( \mu - \frac{\sigma^2}{2} \right) t +
+\sigma W_t \right\}$
+
+Q.17 $\mathbb{E} [X_t] = X_0 e^{\mu t}$ , $\mathbb{V} \tmop{ar} (X_t)$=$X_0^2
+e^{2 \mu t} (e^{\sigma^2 t} - 1)$
+
+Q.18 $\mathbb{E} [X_t^2] = X_{0 }^2 e^{(2 \mu + \sigma^2) t}$
+
+Q.19 For $\tmop{dX}_t = \mu X_t \tmop{dt} + \sigma X_t \tmop{dB}_t$
+\begin{eqnarray*}
+  d (X_t^n) & = & X_t^n \left( n \mu  + \frac{\sigma^2 n (n - 1)}{2} \right)  
+  \tmop{dt} + n \sigma X_t^n {\tmop{dB}_t} ^n
+\end{eqnarray*}
+
+Q.20 $\mathbb{E} [Y_T] = F_0$.
+
+Q.21  V ar($Y_T$)= $F_0^2 \left( \frac{2 (e^{\sigma^2 T} - 1)}{\sigma^4 T^2} -
+\frac{2}{\sigma^2 T} - 1 \right)$, or $F_0^2 \left[ \frac{2}{T^2 \sigma^2}
+\left( \frac{e^{\sigma^2 T} - 1}{\sigma^2} - T \right) - 1 \right]$
+
+Q.22 $X_t = X_0 + a t + b B_t$
+
+Q.23 $d S_t = S_t r d t + \sigma S_t d B_t^{\mathbb{Q}} $
+
+Q.24 $S_t = S_0 \exp \left\{ \left( r - \frac{\sigma^2}{2} \right) t + \sigma
+B_t^{\mathbb{Q}} \right\}$.
+
+Q.25 $x \mathcal{N} \left( d_1 \left( \frac{x}{K e^{- r (T - t)}}, T - t
+\right) \right) - e^{- r (T - t)} K  \mathcal{N} \left( d_2 \left( \frac{x}{K
+e^{- r (T - t) }}, T - t \right) \right)$.
+
+Q.26 Formulae is $d_1 (u, y) = \frac{1}{\sqrt{\sigma^2 u}}
+\ln (y) + \frac{1}{2} \sqrt{\sigma^2} u, d_2 (y, u) = d_1 (y, u) -
+\sqrt{\sigma^2 u}$.
+
+Q.27 $S_0 e^{r t} N (d_1)$
+
+Q.28 $d (X_t^3) = 3 X_t^3 d t + 3 X_{t }^3 d B_t$,  E$[X_t^3] = e^{3 t}$
+
+Q.29 $S_t^{\alpha} = S_0^{\alpha} \exp \left\{ \left( \alpha \mu +
+\frac{\alpha (\alpha - 1) \sigma^2}{2} \right) t + \sigma W_t \right\}$,
+$\tmop{dY}_t = \left( \alpha \mu + \frac{\alpha (\alpha - 1) \sigma^2}{2}
+\right) Y_t \tmop{dt} + \alpha \sigma Y_t \tmop{dB}_t,$
+\[ \tmop{and} \mathbb{E} [S_t^{\alpha}] = S_0^{\alpha} \exp \left\{ \left(
+   \alpha \mu + \frac{\alpha (\alpha - 1) \sigma^2}{2} \right) t \right\} \]
+   
+Q.30 $\mathbb{E}^{\mathbb{Q}} (e^{- r T} S_T \tmmathbf{1}_{S_T \geq K}) - e^{-
+r T} \mathbb{Q} (S_T \geq K)$
+
+Q.31 $X_t$=$X_0 e^{\beta t} + (\alpha - \sigma \theta) \int_0^t e^{- \beta (s
+- t)} d s + \sigma \int_0^t e^{- \beta (s - t)} \tmop{dB}_s $
+
+Q.32 $\partial_t C (s, t) + r s \partial_s C (s, t) + \frac{1}{2} \sigma^2 s^2
+\partial_{s s} C (s, t) = r C (s, t)$
+
+\
+
+\
+
+\
+
+\
+
+\
+
+\
+
+$\mathbb{}$
+
+\
+
+\
+
+\
+
+\
+
+\end{document}
